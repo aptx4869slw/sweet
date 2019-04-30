@@ -29,6 +29,7 @@ public class TestService {
 
     /**
      * 保存方法
+     *
      * @param test
      * @return
      * @throws ServerException
@@ -45,6 +46,7 @@ public class TestService {
 
     /**
      * 查询单条数据
+     *
      * @param id
      * @return
      * @throws ServerException
@@ -64,6 +66,7 @@ public class TestService {
 
     /**
      * 查询列表
+     *
      * @return
      */
     public List<TestDTO> findAll() {
@@ -76,6 +79,7 @@ public class TestService {
 
     /**
      * 修改数据
+     *
      * @param testDTO
      * @return
      * @throws ServerException
@@ -98,6 +102,7 @@ public class TestService {
 
     /**
      * 删除数据
+     *
      * @param id
      * @return
      * @throws ServerException
