@@ -10,11 +10,11 @@ public class Test implements Serializable {
 
     private Long id;
 
-    private Integer integer;
+    private Integer number;
 
     private String string;
 
-    private BigDecimal bigDecimal;
+    private BigDecimal price;
 
     private Boolean flag;
 
@@ -28,12 +28,12 @@ public class Test implements Serializable {
         this.id = id;
     }
 
-    public Integer getInteger() {
-        return integer;
+    public Integer getNumber() {
+        return number;
     }
 
-    public void setInteger(Integer integer) {
-        this.integer = integer;
+    public void setNumber(Integer number) {
+        this.number = number;
     }
 
     public String getString() {
@@ -44,12 +44,12 @@ public class Test implements Serializable {
         this.string = string;
     }
 
-    public BigDecimal getBigDecimal() {
-        return bigDecimal;
+    public BigDecimal getPrice() {
+        return price;
     }
 
-    public void setBigDecimal(BigDecimal bigDecimal) {
-        this.bigDecimal = bigDecimal;
+    public void setPrice(BigDecimal price) {
+        this.price = price;
     }
 
     public Boolean getFlag() {
@@ -68,15 +68,7 @@ public class Test implements Serializable {
         this.localDateTime = localDateTime;
     }
 
-    @Override
-    public String toString() {
-        return "Test{" +
-                "id=" + id +
-                ", integer=" + integer +
-                ", string='" + string + '\'' +
-                ", bigDecimal=" + bigDecimal +
-                ", flag=" + flag +
-                ", localDateTime=" + localDateTime +
-                '}';
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
     }
 }

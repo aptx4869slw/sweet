@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.song.sweetgirl.dao.TestDao">
+    <resultMap id="testMap" type="com.song.sweetgirl.model.Test">
+        <result property="id" column="id"/>
+        <result property="number" column="number"/>
+        <result property="string" column="string"/>
+        <result property="price" column="price"/>
+        <result property="flag" column="flag"/>
+        <result property="localDateTime" column="local_date_time"/>
+    </resultMap>
+
+    <insert id="save" parameterType="com.song.sweetgirl.model.Test" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO Test (number, string, price, flag, local_date_time)
+        VALUES(#{number}, #{string}, #{price}, #{flag}, #{localDateTime})
+    </insert>
+
+    <select id="findOne" resultMap="testMap" parameterType="Long">
+        SELECT * FROM Test
+        WHERE id = #{id}
+    </select>
+
+    <select id="findAll" resultMap="testMap">
+        SELECT * FROM Test
+    </select>
+
+    <update id="update" parameterType="com.song.sweetgirl.model.Test">
+        UPDATE Test SET
+        number = #{number},
+        string = #{string},
+        price = #{price},
+        flag = #{flag},
+        local_date_time = #{localDateTime}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="Long">
+        DELETE FROM Test
+        WHERE id = #{id}
+    </delete>
+
+</mapper>
