@@ -1,6 +1,5 @@
 package com.song.sweetgirl.controller;
 
-import com.song.sweetgirl.model.Test;
 import com.song.sweetgirl.service.TestService;
 import com.song.sweetgirl.service.dto.TestDTO;
 import org.slf4j.Logger;
