@@ -23,10 +23,10 @@ public class TestController {
     private TestService testService;
 
     @PostMapping(path = {"/test"})
-    public ResponseEntity<TestDTO> save(@RequestBody Test test) {
-        logger.debug("REST request to save Test :{}", test.toString());
+    public ResponseEntity<TestDTO> save(@RequestBody TestDTO testDTO) {
+        logger.debug("REST request to save Test :{}", testDTO.toString());
         try {
-            TestDTO result = testService.save(test);
+            TestDTO result = testService.save(testDTO);
             return ResponseEntity.created(new URI("/api/test/" + result.getId())).body(result);
         } catch (Exception e) {
             logger.error("REST request to save Test :{}" + e.getMessage());

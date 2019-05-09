@@ -31,11 +31,12 @@ public class TestService {
     /**
      * 保存方法
      *
-     * @param test
+     * @param testDTO
      * @return
      * @throws ServerException
      */
-    public TestDTO save(Test test) throws ServerException {
+    public TestDTO save(TestDTO testDTO) throws ServerException {
+        Test test = mapper.map(testDTO, Test.class);
         Integer count = testDao.save(test);
         if (count > 0) {
             return mapper.map(test, TestDTO.class);
