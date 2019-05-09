@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.rmi.ServerException;
+import java.time.LocalDateTime;
 import java.util.Comparator;
 import java.util.List;
 
@@ -115,6 +116,14 @@ public class TestService {
             logger.debug("delete failed! :{}", id);
             throw new ServerException("delete failed!");
         }
+    }
+
+    @Transactional
+    public void testTimer() {
+        Test test = testDao.findOne(1L);
+        test.setNumber(test.getNumber() + 1);
+        test.setLocalDateTime(LocalDateTime.now());
+        testDao.update(test);
     }
 
 }
