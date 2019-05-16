@@ -7,8 +7,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class DefaultController {
 
     @RequestMapping("/")
-    public String index() {
+    public String login() {
         return "index";
+    }
+
+
+    @RequestMapping(value = "/blog")
+    public String blog() {
+        return "blog/index";
     }
 
 }
