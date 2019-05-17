@@ -145,25 +145,22 @@
     //登录按钮
     function login() {
         if (onoff) {
-            if (user.value != "admin" || pwd.value != "123456") {
-                hint()
-            } else {
-                let request = new XMLHttpRequest();
-                let url = "/api/login";
-                request.open("post", url, true);
-                let data = new FormData();
-                data.append("username", user.value);
-                data.append("password", pwd.value);
-                request.onreadystatechange = function () {
-                    if (this.readyState == 4) {
-                        if (this.responseText == false)
-                            hint()
-                        else
-                            window.location.href = this.responseText;
+            let request = new XMLHttpRequest();
+            let url = "/api/login";
+            request.open("post", url, true);
+            let data = new FormData();
+            data.append("username", user.value);
+            data.append("password", pwd.value);
+            request.onreadystatechange = function () {
+                if (this.readyState == 4) {
+                    if (this.responseText == "error") {
+                        hint()
+                    } else {
+                        window.location.href = this.responseText;
                     }
                 }
-                request.send(data)
-            }
+            };
+            request.send(data)
         } else {
             let status = document.getElementById("status").getElementsByTagName("i")
             confirm.style.height = 0;

@@ -27,7 +27,7 @@ public class LoginController {
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
 
-    @PostMapping(value = "login")
+    @PostMapping(value = "/login")
     public String login(User user) {
         logger.debug("REST request to Login Into System :{}", user.toString());
         try {
@@ -35,7 +35,7 @@ public class LoginController {
             if (result) {
                 return "blog";
             } else {
-                throw new ServerException("登录失败！");
+                return "error";
             }
         } catch (Exception e) {
             logger.error("REST request to Login Into System :{}" + e.getMessage());

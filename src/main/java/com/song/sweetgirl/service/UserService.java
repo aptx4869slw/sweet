@@ -1,8 +1,10 @@
 package com.song.sweetgirl.service;
 
+import com.song.sweetgirl.dao.UserDAO;
 import com.song.sweetgirl.model.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,6 +14,9 @@ public class UserService {
 
     private final Logger logger = LoggerFactory.getLogger(TestService.class);
 
+    @Autowired
+    private UserDAO userDAO;
+
     /**
      * 登陆
      *
@@ -19,10 +24,13 @@ public class UserService {
      * @return
      */
     public Boolean login(User user) {
-        String username = "admin";
-        String password = "123456";
-        if (username.equals(user.getUsername()) && password.equals(user.getPassword())) {
-            return Boolean.TRUE;
+        User result = userDAO.findUser(user);
+        if (result != null) {
+            if (result.getUsername().equals(user.getUsername()) && result.getPassword().equals(user.getPassword())) {
+                return Boolean.TRUE;
+            } else {
+                return Boolean.FALSE;
+            }
         } else {
             return Boolean.FALSE;
         }
