@@ -11,7 +11,6 @@ public class DefaultController {
         return "index";
     }
 
-
     @RequestMapping(value = "/blog")
     public String blog() {
         return "blog/index";
