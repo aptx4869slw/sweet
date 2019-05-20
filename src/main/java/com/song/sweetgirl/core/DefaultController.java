@@ -1,4 +1,4 @@
-package com.song.sweetgirl.controller;
+package com.song.sweetgirl.core;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.rmi.ServerException;
+
 @Service
 @Transactional
 public class UserService {
@@ -23,7 +25,7 @@ public class UserService {
      * @param user
      * @return
      */
-    public Boolean login(User user) {
+    public Boolean login(User user) throws Exception{
         User result = userDAO.findUser(user);
         if (result != null) {
             if (result.getUsername().equals(user.getUsername()) && result.getPassword().equals(user.getPassword())) {

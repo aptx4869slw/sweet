@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="icon" type="image/x-icon" href="#"/>
+    <link rel="icon" type="image/x-icon" href="images/login_index.ico"/>
     <link type="text/css" rel="styleSheet" href="css/login.css"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>账号登录</title>
+    <title>Hi,你好呀</title>
 </head>
 
 <body>
@@ -70,7 +70,7 @@
 
     //自动居中title
     var name_c = document.getElementById("title")
-    name = name_c.innerHTML.split("")
+    var name = name_c.innerHTML.split("")
     name_c.innerHTML = ""
     for (i = 0; i < name.length; i++)
         if (name[i] != ",")

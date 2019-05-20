@@ -19,7 +19,7 @@ import java.util.Map;
 @RequestMapping("/api")
 public class LoginController {
 
-    private final Logger logger = LoggerFactory.getLogger(TestController.class);
+    private final Logger logger = LoggerFactory.getLogger(LoginController.class);
 
     @Autowired
     private UserService userService;
