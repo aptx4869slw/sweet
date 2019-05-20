@@ -16,4 +16,19 @@ public class DefaultController {
         return "blog/index";
     }
 
+    @RequestMapping(value = "/search")
+    public String search() {
+        return "blog/search";
+    }
+
+    @RequestMapping(value = "/detail")
+    public String detail() {
+        return "blog/detail";
+    }
+
+    @RequestMapping(value = "/archives")
+    public String archives() {
+        return "blog/archives";
+    }
+
 }
