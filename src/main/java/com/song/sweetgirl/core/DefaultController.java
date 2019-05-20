@@ -26,9 +26,4 @@ public class DefaultController {
         return "blog/detail";
     }
 
-    @RequestMapping(value = "/archives")
-    public String archives() {
-        return "blog/archives";
-    }
-
 }
