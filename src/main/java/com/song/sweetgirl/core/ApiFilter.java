@@ -1,11 +1,13 @@
 package com.song.sweetgirl.core;
 
-import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
 
 import javax.servlet.*;
+import javax.servlet.annotation.WebFilter;
 import java.io.IOException;
 
-@Configuration
+@Component
+@WebFilter(urlPatterns = "/*",filterName = "ApiFilter")
 public class ApiFilter implements Filter {
 
     @Override
