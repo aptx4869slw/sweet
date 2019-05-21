@@ -7,7 +7,7 @@ import javax.servlet.annotation.WebFilter;
 import java.io.IOException;
 
 @Component
-@WebFilter(urlPatterns = "/*",filterName = "ApiFilter")
+@WebFilter(urlPatterns = "/*", filterName = "ApiFilter")
 public class ApiFilter implements Filter {
 
     @Override
@@ -15,11 +15,8 @@ public class ApiFilter implements Filter {
     }
 
     @Override
-    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
-            throws IOException, ServletException {
-        request.setCharacterEncoding("UTF-8");
-        response.setCharacterEncoding("UTF-8");
-        chain.doFilter(request, response);
+    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
+        filterChain.doFilter(servletRequest, servletResponse);
     }
 
     @Override
