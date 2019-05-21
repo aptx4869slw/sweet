@@ -21,8 +21,17 @@
         WHERE id = #{id}
     </select>
 
+    <select id="findFirstTest" resultMap="testMap">
+        SELECT * FROM Test
+        limit 1
+    </select>
+
     <select id="findAll" resultMap="testMap">
         SELECT * FROM Test
+    </select>
+
+    <select id="countTests" resultType="Integer">
+        SELECT COUNT(1) FROM Test
     </select>
 
     <update id="update" parameterType="com.song.sweetgirl.model.Test">

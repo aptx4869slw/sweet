@@ -12,6 +12,8 @@ public class User implements Serializable {
 
     private String password;
 
+    private String conPassword;
+
     public Long getId() {
         return id;
     }
@@ -36,12 +38,22 @@ public class User implements Serializable {
         this.password = password;
     }
 
+    public String getConPassword() {
+        return conPassword;
+    }
+
+    public void setConPassword(String conPassword) {
+        this.conPassword = conPassword;
+    }
+
     @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
+                ", conPassword='" + conPassword + '\'' +
                 '}';
     }
+
 }

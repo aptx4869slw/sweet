@@ -25,7 +25,7 @@ public class UserService {
      * @param user
      * @return
      */
-    public Boolean login(User user) throws Exception{
+    public Boolean login(User user) throws Exception {
         User result = userDAO.findUser(user);
         if (result != null) {
             if (result.getUsername().equals(user.getUsername()) && result.getPassword().equals(user.getPassword())) {
@@ -35,6 +35,15 @@ public class UserService {
             }
         } else {
             return Boolean.FALSE;
+        }
+    }
+
+    public String register(User user) throws Exception {
+        User result = userDAO.findByUserName(user);
+        if (result != null) {
+            return "exist";
+        } else {
+            return "success";
         }
     }
 }

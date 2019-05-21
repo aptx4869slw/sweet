@@ -18,4 +18,8 @@ public interface TestDao {
 
     Integer delete(Long id);
 
+    Integer countTests();
+
+    Test findFirstTest();
+
 }

@@ -43,4 +43,16 @@ public class LoginController {
         }
     }
 
+    @PostMapping(value = "/register")
+    public String register(User user) {
+        logger.debug("REST request to register User Into System :{}", user.toString());
+        try {
+            String status = userService.register(user);
+            return status;
+        } catch (Exception e) {
+            logger.error("REST request to register User Into System :{}" + e.getMessage());
+            return "error.html";
+        }
+    }
+
 }

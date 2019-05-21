@@ -119,12 +119,17 @@ public class TestService {
         }
     }
 
+    /**
+     * 定时器定时清理数据
+     */
     @Transactional
     public void testTimer() {
-        Test test = testDao.findOne(1L);
-        test.setNumber(test.getNumber() + 1);
-        test.setLocalDateTime(LocalDateTime.now());
-        testDao.update(test);
+        Integer total = 10;
+        Integer count = testDao.countTests();
+        if (count > total) {
+            Test test = testDao.findFirstTest();
+            testDao.delete(test.getId());
+        }
     }
 
 }

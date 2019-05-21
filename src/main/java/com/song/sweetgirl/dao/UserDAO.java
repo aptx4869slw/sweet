@@ -8,4 +8,6 @@ public interface UserDAO {
 
     User findUser(User user);
 
+    User findByUserName(User user);
+
 }

@@ -16,4 +16,9 @@
         WHERE username = #{username} AND password = #{password}
     </select>
 
+    <select id="findByUserName" resultMap="userMap" parameterType="com.song.sweetgirl.model.User">
+        SELECT * FROM User
+        WHERE username = #{username}
+    </select>
+
 </mapper>
