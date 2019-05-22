@@ -1,4 +1,4 @@
-package com.song.sweetgirl.core;
+package com.song.sweetgirl.service.utils;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
