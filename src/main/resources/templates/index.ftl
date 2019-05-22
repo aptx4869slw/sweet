@@ -116,22 +116,24 @@
 
     function login() {
         if (onoff) {
-            let url = "/api/login";
-            let data = new FormData();
-            let request = new XMLHttpRequest();
-            request.open("post", url, true);
-            data.append("username", user.value);
-            data.append("password", pwd.value);
-            request.onreadystatechange = function () {
-                if (this.readyState === 4) {
-                    if (this.responseText === "登陆失败") {
-                        hint()
-                    } else {
-                        window.location.href = this.responseText;
+            if (user.value != "" && pwd.value != "") {
+                let url = "/api/login";
+                let data = new FormData();
+                let request = new XMLHttpRequest();
+                request.open("post", url, true);
+                data.append("username", user.value);
+                data.append("password", pwd.value);
+                request.onreadystatechange = function () {
+                    if (this.readyState === 4) {
+                        if (this.responseText === "登陆失败") {
+                            hint()
+                        } else {
+                            window.location.href = this.responseText;
+                        }
                     }
-                }
-            };
-            request.send(data)
+                };
+                request.send(data)
+            }
         } else {
             let status = document.getElementById("status").getElementsByTagName("i");
             confirm.style.height = 0;
