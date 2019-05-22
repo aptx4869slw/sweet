@@ -17,9 +17,6 @@ public class LoginController {
     @Autowired
     private UserService userService;
 
-    @Autowired
-    private StringRedisTemplate stringRedisTemplate;
-
     @PostMapping(value = "/login")
     public String login(User user) {
         logger.debug("REST request to Login Into System :{}", user.toString());
