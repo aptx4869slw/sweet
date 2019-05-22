@@ -116,7 +116,7 @@
 
     function login() {
         if (onoff) {
-            if (user.value != "" && pwd.value != "") {
+            if (user.value !== "" && pwd.value !== "") {
                 let url = "/api/login";
                 let data = new FormData();
                 let request = new XMLHttpRequest();
