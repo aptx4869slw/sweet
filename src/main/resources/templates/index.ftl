@@ -180,7 +180,7 @@
                             hit.innerHTML = this.responseText;
                         }
                     }
-                }
+                };
                 request.send(data)
             }
             hint()
