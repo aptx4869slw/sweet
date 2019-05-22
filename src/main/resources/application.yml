@@ -1,0 +1,51 @@
+server:
+  port: 80
+  session-timeout: 30
+  tomcat.max-threads: 0
+  tomcat.uri-encoding: UTF-8
+
+spring:
+  datasource:
+    username : root
+    password :
+    generate-unique-name: false
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url : jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    cachePrepStmts: true
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password:
+    database: 0
+    timeout: 5000
+    jedis:
+      pool:
+        max-active: 50
+        max-wait: 3000
+        max-idle: 20
+        min-idle: 2
+  mvc:
+    view:
+      prefix: /pages/
+      suffix: .html
+  thymeleaf:
+    cache: false
+    encoding: UTF-8
+    mode: LEGACYHTML5
+    suffix: .html
+    prefix: classpath:/templates/
+    check-template-location: true
+  devtools:
+    restart:
+      enabled: true
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: Asia/Shanghai
+
+mybatis:
+  typeAliasesPackage: com.song.sweetgirl.model
+  mapperLocations: classpath:mapper/*.xml
+
+logging:
+  level:
+    com.song.sweetgirl: debug
