@@ -124,11 +124,14 @@ public class TestService {
      */
     @Transactional
     public void testTimer() {
-        Integer total = 10;
+        final Integer total = 100;
         Integer count = testDao.countTests();
         if (count > total) {
             Test test = testDao.findFirstTest();
-            testDao.delete(test.getId());
+            Integer num = testDao.delete(test.getId());
+            if (num > 0) {
+                logger.info(test.toString());
+            }
         }
     }
 

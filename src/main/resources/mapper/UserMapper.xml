@@ -4,11 +4,8 @@
 <mapper namespace="com.song.sweetgirl.dao.UserDAO">
     <resultMap id="userMap" type="com.song.sweetgirl.model.User">
         <result property="id" column="id"/>
-        <result property="number" column="number"/>
-        <result property="string" column="string"/>
-        <result property="price" column="price"/>
-        <result property="flag" column="flag"/>
-        <result property="localDateTime" column="local_date_time"/>
+        <result property="username" column="username"/>
+        <result property="password" column="password"/>
     </resultMap>
 
     <select id="findUser" resultMap="userMap" parameterType="com.song.sweetgirl.model.User">
@@ -20,5 +17,10 @@
         SELECT * FROM User
         WHERE username = #{username}
     </select>
+
+    <insert id="saveUser" parameterType="com.song.sweetgirl.model.User">
+        INSERT INTO User (username, password)
+        VALUES(#{username}, #{password})
+    </insert>
 
 </mapper>

@@ -109,10 +109,10 @@
     }*/
 
     document.onkeydown = function (e) {
-        if (e.keyCode == 13) {
+        if (e.keyCode === 13) {
             document.getElementById("login_enter").onclick();
         }
-    }
+    };
 
     function login() {
         if (onoff) {
@@ -123,8 +123,8 @@
             data.append("username", user.value);
             data.append("password", pwd.value);
             request.onreadystatechange = function () {
-                if (this.readyState == 4) {
-                    if (this.responseText == "error") {
+                if (this.readyState === 4) {
+                    if (this.responseText === "登陆失败") {
                         hint()
                     } else {
                         window.location.href = this.responseText;
@@ -156,9 +156,9 @@
                 hit.innerHTML = "账号长度必须大于6位";
             } else if (pwd.value.length < 6) {
                 hit.innerHTML = "密码长度必须大于6位";
-            } else if (pwd.value != con_pass.value) {
+            } else if (pwd.value !== con_pass.value) {
                 hit.innerHTML = "两次密码不相等";
-            } else if (pwd.value == con_pass.value) {
+            } else if (pwd.value === con_pass.value) {
                 let url = "/api/register";
                 let data = new FormData();
                 let request = new XMLHttpRequest();
@@ -167,14 +167,15 @@
                 data.append("password", pwd.value);
                 data.append("conPassword", con_pass.value);
                 request.onreadystatechange = function () {
-                    if (this.readyState == 4) {
-                        if (this.responseText == "exist") {
-                            hit.innerHTML = "该账号已存在";
-                        } else if (this.responseText == "success") {
-                            hit.innerHTML = "账号注册成功，两秒后自动刷新页面";
+                    if (this.readyState === 4) {
+                        if (this.responseText === "该账号已存在") {
+                            hit.innerHTML = this.responseText;
+                        } else if (this.responseText === "账号注册成功") {
+                            hit.innerHTML = this.responseText + "，两秒后自动刷新页面";
+                            // language=JavaScript
                             setTimeout("window.location.reload()", 2000)
                         } else {
-                            hit.innerHTML = "账号注册失败";
+                            hit.innerHTML = this.responseText;
                         }
                     }
                 }
