@@ -23,7 +23,7 @@ public class SweetgirlApplicationTests {
     @Autowired
     TestService testService;
 
-    private final static Long id = 1L;
+    private final static Long id = 10086L;
 
     private final static Boolean boo = Boolean.TRUE;
 
