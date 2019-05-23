@@ -1,5 +1,6 @@
 package com.song.sweetgirl.dao;
 
+import com.github.pagehelper.Page;
 import com.song.sweetgirl.model.Test;
 import org.springframework.stereotype.Repository;
 
@@ -12,7 +13,9 @@ public interface TestDao {
 
     Test findOne(Long id);
 
-    List<Test> findAll();
+    Page<Test> findAll();
+
+    Page<Test> findAllByPage();
 
     Integer update(Test test);
 

@@ -1,5 +1,6 @@
 package com.song.sweetgirl;
 
+import com.song.sweetgirl.controller.vm.PageVM;
 import com.song.sweetgirl.service.TestService;
 import com.song.sweetgirl.service.dto.TestDTO;
 import org.junit.Test;
@@ -68,7 +69,7 @@ public class SweetgirlApplicationTests {
     @Test
     @Transactional
     public void findAll() throws Exception {
-        List<TestDTO> testDTOS = testService.findAll();
+        List<TestDTO> testDTOS = testService.findAll(new PageVM());
         assertThat(testDTOS.size()).isGreaterThanOrEqualTo(1);
     }
 

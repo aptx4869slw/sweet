@@ -2,32 +2,48 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.song.sweetgirl.dao.TestDao">
-    <resultMap id="testMap" type="com.song.sweetgirl.model.Test">
-        <result property="id" column="id"/>
-        <result property="number" column="number"/>
-        <result property="string" column="string"/>
-        <result property="price" column="price"/>
-        <result property="flag" column="flag"/>
-        <result property="localDateTime" column="local_date_time"/>
+    <resultMap id="BaseResultMap" type="com.song.sweetgirl.model.Test">
+        <result property="id" column="id" jdbcType="BIGINT"/>
+        <result property="number" column="number" jdbcType="INTEGER"/>
+        <result property="string" column="string" jdbcType="VARCHAR"/>
+        <result property="price" column="price" jdbcType="DECIMAL"/>
+        <result property="flag" column="flag" jdbcType="BIT"/>
+        <result property="localDateTime" column="local_date_time" jdbcType="TIMESTAMP"/>
     </resultMap>
+
+    <sql id="Base_Column_List">
+        id, number, string, price, flag, local_date_time
+    </sql>
 
     <insert id="save" parameterType="com.song.sweetgirl.model.Test" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO Test (number, string, price, flag, local_date_time)
         VALUES(#{number}, #{string}, #{price}, #{flag}, #{localDateTime})
     </insert>
 
-    <select id="findOne" resultMap="testMap" parameterType="Long">
-        SELECT * FROM Test
+    <select id="findOne" resultMap="BaseResultMap" parameterType="Long">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM Test
         WHERE id = #{id}
     </select>
 
-    <select id="findFirstTest" resultMap="testMap">
-        SELECT * FROM Test
+    <select id="findFirstTest" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM Test
         limit 1
     </select>
 
-    <select id="findAll" resultMap="testMap">
-        SELECT * FROM Test
+    <select id="findAll" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM Test
+    </select>
+
+    <select id="findAllByPage" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM Test
     </select>
 
     <select id="countTests" resultType="Integer">

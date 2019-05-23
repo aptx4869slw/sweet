@@ -1,5 +1,6 @@
 package com.song.sweetgirl.controller;
 
+import com.song.sweetgirl.controller.vm.PageVM;
 import com.song.sweetgirl.service.TestService;
 import com.song.sweetgirl.service.dto.TestDTO;
 import org.slf4j.Logger;
@@ -46,10 +47,10 @@ public class TestController {
     }
 
     @GetMapping(path = {"/test"})
-    public ResponseEntity<List<TestDTO>> findAll() {
+    public ResponseEntity<List<TestDTO>> findAll(PageVM page) {
         logger.debug("REST request to get all tests");
         try {
-            List<TestDTO> result = testService.findAll();
+            List<TestDTO> result = testService.findAll(page);
             return ResponseEntity.status(HttpStatus.OK).body(result);
         } catch (Exception e) {
             logger.error("REST request to get all tests :{}" + e.getMessage());

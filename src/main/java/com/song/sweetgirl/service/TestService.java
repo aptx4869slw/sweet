@@ -1,5 +1,8 @@
 package com.song.sweetgirl.service;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.song.sweetgirl.controller.vm.PageVM;
 import com.song.sweetgirl.dao.TestDao;
 import com.song.sweetgirl.model.Test;
 import com.song.sweetgirl.service.dto.TestDTO;
@@ -71,9 +74,15 @@ public class TestService {
      *
      * @return
      */
-    public List<TestDTO> findAll() {
-        List<Test> list = testDao.findAll();
-        List<TestDTO> result = mapper.map(list, new TypeToken<List<TestDTO>>() {
+    public List<TestDTO> findAll(PageVM page) {
+        Page<Test> pageResult;
+        if (page.getPageNum() != null && page.getPageSize() != null) {
+            PageHelper.startPage(page.getPageNum(), page.getPageSize());
+            pageResult = testDao.findAllByPage();
+        } else {
+            pageResult = testDao.findAll();
+        }
+        List<TestDTO> result = mapper.map(pageResult, new TypeToken<List<TestDTO>>() {
         }.getType());
         result.sort(Comparator.comparing(TestDTO::getLocalDateTime));
         return result;

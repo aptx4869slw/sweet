@@ -48,6 +48,12 @@ mybatis:
   typeAliasesPackage: com.song.sweetgirl.model
   mapperLocations: classpath:mapper/*.xml
 
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
+  support-methods-arguments: true
+  params: count=countSql
+
 logging:
   level:
     com.song.sweetgirl.dao: debug
