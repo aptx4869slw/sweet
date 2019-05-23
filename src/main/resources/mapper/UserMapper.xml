@@ -2,19 +2,27 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.song.sweetgirl.dao.UserDAO">
-    <resultMap id="userMap" type="com.song.sweetgirl.model.User">
+    <resultMap id="BaseResultMap" type="com.song.sweetgirl.model.User">
         <result property="id" column="id"/>
         <result property="username" column="username"/>
         <result property="password" column="password"/>
     </resultMap>
 
-    <select id="findUser" resultMap="userMap" parameterType="com.song.sweetgirl.model.User">
-        SELECT * FROM User
+    <sql id="Base_Column_List">
+        id, username, password
+    </sql>
+
+    <select id="findUser" resultMap="BaseResultMap" parameterType="com.song.sweetgirl.model.User">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM User
         WHERE username = #{username} AND password = #{password}
     </select>
 
-    <select id="findByUserName" resultMap="userMap" parameterType="com.song.sweetgirl.model.User">
-        SELECT * FROM User
+    <select id="findByUserName" resultMap="BaseResultMap" parameterType="com.song.sweetgirl.model.User">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM User
         WHERE username = #{username}
     </select>
 
