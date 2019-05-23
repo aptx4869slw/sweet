@@ -154,7 +154,7 @@
         } else {
             if (!/^[A-Za-z0-9]+$/.test(user.value)) {
                 hit.innerHTML = "账号只能为英文和数字";
-            } else if (user.value.length < 4) {
+            } else if (user.value.length < 6) {
                 hit.innerHTML = "账号长度必须大于6位";
             } else if (pwd.value.length < 6) {
                 hit.innerHTML = "密码长度必须大于6位";
