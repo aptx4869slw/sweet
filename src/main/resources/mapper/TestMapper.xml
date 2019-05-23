@@ -35,12 +35,24 @@
     </select>
 
     <update id="update" parameterType="com.song.sweetgirl.model.Test">
-        UPDATE Test SET
-        number = #{number},
-        string = #{string},
-        price = #{price},
-        flag = #{flag},
-        local_date_time = #{localDateTime}
+        UPDATE Test
+        <trim prefix="set" suffixOverrides=",">
+            <if test="number != null">
+                number = #{number},
+            </if>
+            <if test="string != null and string != ''">
+                string = #{string},
+            </if>
+            <if test="price != null">
+                price = #{price},
+            </if>
+            <if test="flag != null">
+                flag = #{flag},
+            </if>
+            <if test="localDateTime != null">
+                local_date_time = #{localDateTime},
+            </if>
+        </trim>
         WHERE id = #{id}
     </update>
 

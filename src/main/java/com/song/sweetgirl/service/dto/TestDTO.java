@@ -1,5 +1,7 @@
 package com.song.sweetgirl.service.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -19,6 +21,7 @@ public class TestDTO implements Serializable {
 
     private Boolean flag;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime localDateTime;
 
     private List<String> list;

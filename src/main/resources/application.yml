@@ -50,4 +50,4 @@ mybatis:
 
 logging:
   level:
-    com.song.sweetgirl: debug
+    com.song.sweetgirl.dao: debug

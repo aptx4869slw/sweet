@@ -68,7 +68,4 @@ public class Test implements Serializable {
         this.localDateTime = localDateTime;
     }
 
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
-    }
 }
