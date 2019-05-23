@@ -6,6 +6,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -18,24 +20,26 @@ public class LoginController {
     private UserService userService;
 
     @PostMapping(value = "/login")
-    public String login(User user) {
+    public ResponseEntity<String> login(User user) {
         logger.debug("REST request to Login Into System :{}", user.toString());
         try {
-            return userService.login(user);
+            String result = userService.login(user);
+            return ResponseEntity.status(HttpStatus.OK).body(result);
         } catch (Exception e) {
             logger.error("REST request to Login Into System :{}" + e.getMessage());
-            return "error.html";
+            return ResponseEntity.status(HttpStatus.OK).body("error.html");
         }
     }
 
     @PostMapping(value = "/register")
-    public String register(User user) {
+    public ResponseEntity<String> register(User user) {
         logger.debug("REST request to register User Into System :{}", user.toString());
         try {
-            return userService.register(user);
+            String result = userService.register(user);
+            return ResponseEntity.status(HttpStatus.OK).body(result);
         } catch (Exception e) {
             logger.error("REST request to register User Into System :{}" + e.getMessage());
-            return "error.html";
+            return ResponseEntity.status(HttpStatus.OK).body("error.html");
         }
     }
 
