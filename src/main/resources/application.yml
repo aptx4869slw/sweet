@@ -11,7 +11,7 @@ spring:
     generate-unique-name: false
     driver-class-name: com.mysql.cj.jdbc.Driver
     url : jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
-    cachePrepStmts: true
+    cache-prep-stmts: true
   redis:
     host: 127.0.0.1
     port: 6379
@@ -45,7 +45,7 @@ spring:
     time-zone: Asia/Shanghai
 
 mybatis:
-  typeAliasesPackage: com.song.sweetgirl.model
+  type-aliases-package: com.song.sweetgirl.model
   mapperLocations: classpath:mapper/*.xml
 
 pagehelper:
