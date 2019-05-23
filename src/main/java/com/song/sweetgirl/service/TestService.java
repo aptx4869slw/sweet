@@ -76,11 +76,11 @@ public class TestService {
      */
     public List<TestDTO> findAll(PageVM page) {
         Page<Test> pageResult;
-        if (page.getPageNum() != null && page.getPageSize() != null) {
+        if (page.getPageNum() == null || page.getPageSize() == null) {
+            pageResult = testDao.findAll();
+        } else {
             PageHelper.startPage(page.getPageNum(), page.getPageSize());
             pageResult = testDao.findAllByPage();
-        } else {
-            pageResult = testDao.findAll();
         }
         List<TestDTO> result = mapper.map(pageResult, new TypeToken<List<TestDTO>>() {
         }.getType());
