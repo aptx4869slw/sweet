@@ -25,4 +25,12 @@ public class PageVM implements Serializable {
     public void setPageSize(Integer pageSize) {
         this.pageSize = pageSize;
     }
+
+    @Override
+    public String toString() {
+        return "PageVM{" +
+                "pageNum=" + pageNum +
+                ", pageSize=" + pageSize +
+                '}';
+    }
 }
