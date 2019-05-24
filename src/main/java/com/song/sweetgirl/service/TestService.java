@@ -11,6 +11,7 @@ import org.modelmapper.TypeToken;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
@@ -24,6 +25,7 @@ import java.util.List;
 
 @Service
 @Transactional
+@CacheConfig(cacheNames = "test")
 public class TestService {
 
     private final Logger logger = LoggerFactory.getLogger(TestService.class);
@@ -59,7 +61,7 @@ public class TestService {
      * @return
      * @throws ServerException
      */
-    @Cacheable(value = "findOne", key = "#id", unless = "#result eq null")
+    @Cacheable(value = "findOne", key = "#p0", unless = "#result eq null")
     public TestDTO findOne(Long id) throws ServerException {
         Test test = testDao.findOne(id);
         if (test == null) {
@@ -78,7 +80,7 @@ public class TestService {
      *
      * @return
      */
-    @Cacheable(value = "findAll")
+    @Cacheable(value = "findAll", unless = "#result eq null")
     public List<TestDTO> findAll(PageVM page) {
         Page<Test> pageResult;
         if (page.getPageNum() == null || page.getPageSize() == null) {
@@ -124,7 +126,7 @@ public class TestService {
      * @return
      * @throws ServerException
      */
-    @CacheEvict(value = "delete", key = "#id")
+    @CacheEvict(value = "delete", key = "#id", allEntries = true)
     public Boolean delete(Long id) throws ServerException {
         Integer count = testDao.delete(id);
         if (count > 0) {
