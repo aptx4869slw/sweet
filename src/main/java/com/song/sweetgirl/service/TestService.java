@@ -3,6 +3,7 @@ package com.song.sweetgirl.service;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.song.sweetgirl.controller.vm.PageVM;
+import com.song.sweetgirl.core.annotation.RedisCacheable;
 import com.song.sweetgirl.dao.TestDao;
 import com.song.sweetgirl.model.Test;
 import com.song.sweetgirl.service.dto.TestDTO;
@@ -19,7 +20,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.rmi.ServerException;
-import java.time.LocalDateTime;
 import java.util.Comparator;
 import java.util.List;
 
@@ -79,7 +79,7 @@ public class TestService {
      *
      * @return
      */
-    @Cacheable(value = "findAll")
+    @RedisCacheable(key = "#page", expireTime = 60 * 1)
     public List<TestDTO> findAll(PageVM page) {
         Page<Test> pageResult;
         if (page.getPageNum() == null || page.getPageSize() == null) {
