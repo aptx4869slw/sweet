@@ -44,6 +44,11 @@ document.body.addEventListener('touchstart', function () {
         };
 
     $(document).ready(function () {
+        // 页脚跳转
+        $("#weibo").click(function () {
+            window.location.href = "https://weibo.com/u/5305038934?is_all=1"
+        });
+
         App.init();
 
         // animate
