@@ -13,7 +13,7 @@ public class DefaultController {
 
     @RequestMapping(value = "/blog")
     public String blog() {
-        return "blog/index";
+        return "blog/blog";
     }
 
     @RequestMapping(value = "/search")

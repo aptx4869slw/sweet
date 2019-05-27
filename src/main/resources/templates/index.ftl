@@ -32,7 +32,7 @@
                                id="login_enter">
                         <input type="button" value="Sign in" class="btn" onclick='signin()' id="btn">
                     </form>
-                    <a href="www.baidu.com">忘记密码？</a>
+                    <a href="/blog">No Secret Landing？</a>
                 </span>
         </div>
         <!-- 图片绘制框 -->
