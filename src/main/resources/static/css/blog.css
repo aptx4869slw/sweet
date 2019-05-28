@@ -2170,7 +2170,7 @@ h1.post_title {
 }
 
 .blog-card-excerpt {
-    background: #fff url(../images/status-line.png) repeat;
+    background: #fff repeat;
     color: rgba(2, 0, 0, .6)
 }
 
