@@ -8,7 +8,7 @@ public class DefaultController {
 
     @RequestMapping("/")
     public String login() {
-        return "index";
+        return "login";
     }
 
     @RequestMapping(value = "/blog")
@@ -24,6 +24,11 @@ public class DefaultController {
     @RequestMapping(value = "/detail")
     public String detail() {
         return "blog/detail";
+    }
+
+    @RequestMapping(value = "/album")
+    public String album() {
+        return "blog/album";
     }
 
 }
