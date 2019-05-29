@@ -41,4 +41,9 @@ public class DefaultController {
         return "blog/journal";
     }
 
+    @RequestMapping(value = "/leave_word")
+    public String leave_word() {
+        return "blog/leave_word";
+    }
+
 }
