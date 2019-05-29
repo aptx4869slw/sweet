@@ -36,4 +36,9 @@ public class DefaultController {
         return "blog/contact";
     }
 
+    @RequestMapping(value = "/journal")
+    public String journal() {
+        return "blog/journal";
+    }
+
 }
