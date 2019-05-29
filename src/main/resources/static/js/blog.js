@@ -1,7 +1,6 @@
 document.body.addEventListener('touchstart', function () {
 });
 (function ($, window) {
-
     var App = App ||
         {
             init: function () {
@@ -20,7 +19,6 @@ document.body.addEventListener('touchstart', function () {
                     gallery: {
                         enabled: true
                     },
-
                     zoom: {
                         enabled: true,
                         duration: 300, // duration of the effect, in milliseconds
@@ -30,14 +28,10 @@ document.body.addEventListener('touchstart', function () {
                         }
                     }
                 });
-
                 $('.js-next a').on('click', function (e) {
                     $(infinite_scroll.contentSelector).infinitescroll(infinite_scroll);
-
                     var $body = $('body');
-
                     $body.scrollTop($body.scrollTop() - 1);
-
                     e.preventDefault();
                 })
             }
@@ -48,9 +42,7 @@ document.body.addEventListener('touchstart', function () {
         $("#weibo").click(function () {
             window.location.href = "https://weibo.com/u/5305038934?is_all=1"
         });
-
         App.init();
-
         // animate
         AOS.init(/* {
 		offset: 200,
@@ -58,11 +50,9 @@ document.body.addEventListener('touchstart', function () {
 		easing: 'ease-in-sine',
 		delay: 100,
 		} */);
-
         // Menu	scrolled
         $(window).scroll(function () {
             var mask = $('.bt-nav');
-
             if ($(this).scrollTop() > 1) {
                 mask.addClass("scrolled");
             }
@@ -132,7 +122,6 @@ document.body.addEventListener('touchstart', function () {
                 $('.author-info').toggle(200);
             });
         }
-
         // Make Ajax Search
         var input_search = $("#search-input");
 
@@ -276,5 +265,4 @@ document.body.addEventListener('touchstart', function () {
 
         //end
     });
-
 }(jQuery, window));

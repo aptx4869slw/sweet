@@ -24,7 +24,6 @@ $(document).ready(function () {
     $(function () {
         $.preload(images, {
             init: function (loaded, total) {
-
             },
             loaded_all: function (loaded, total) {
                 $('#indicator').fadeOut('slow', function () {
