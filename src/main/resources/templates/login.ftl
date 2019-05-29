@@ -3,8 +3,8 @@
 <head>
     <title>Hi,你好呀</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <link type="text/css" rel="styleSheet" href="css/login.css"/>
-    <link rel="icon" type="image/x-icon" href="images/favicon.ico"/>
+    <link type="text/css" rel="styleSheet" href="./css/login.css"/>
+    <link rel="icon" type="image/x-icon" href="./images/favicon.ico"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
@@ -56,7 +56,6 @@
         </div>
     </div>
 </div>
-<script src="js/login.js" type="text/javascript" charset="utf-8"></script>
+<script src="./js/login.js" type="text/javascript" charset="utf-8"></script>
 </body>
-
 </html>

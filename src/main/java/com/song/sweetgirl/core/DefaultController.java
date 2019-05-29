@@ -31,4 +31,9 @@ public class DefaultController {
         return "blog/album";
     }
 
+    @RequestMapping(value = "/contact")
+    public String contact() {
+        return "blog/contact";
+    }
+
 }
