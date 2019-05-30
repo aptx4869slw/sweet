@@ -347,9 +347,7 @@
 .hermit-song.selected .hermit-song-index {
     width: 38px;
     text-indent: -999em;
-    background-image: url(../images/playing.gif);
-    background-position: 50% 50%;
-    background-repeat: no-repeat;
+    background: url(../images/playing.gif) no-repeat 50% 50%;
     background-size: 16px
 }
 
