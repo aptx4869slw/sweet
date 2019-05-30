@@ -1,16 +1,10 @@
-server:
-  port: 80
-  session-timeout: 30
-  tomcat.max-threads: 0
-  tomcat.uri-encoding: UTF-8
-
 spring:
   datasource:
-    username : root
-    password :
-    generate-unique-name: false
     driver-class-name: com.mysql.cj.jdbc.Driver
     url : jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    username : ENC(7Y1ASPSRVRnIsluHgSMFrw==)
+    password : ENC(zr1CAapZa43EhtHzHY03pQ==)
+    generate-unique-name: false
     cache-prep-stmts: true
   redis:
     host: 127.0.0.1
@@ -30,7 +24,7 @@ spring:
     store-type: redis
   mvc:
     view:
-      prefix: /pages/
+      prefix: /blog/
       suffix: .html
   thymeleaf:
     cache: false
@@ -46,6 +40,12 @@ spring:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: Asia/Shanghai
 
+server:
+  port: 80
+  session-timeout: 30
+  tomcat.max-threads: 0
+  tomcat.uri-encoding: UTF-8
+
 mybatis:
   type-aliases-package: com.song.sweetgirl.model
   mapperLocations: classpath:mapper/*.xml
@@ -55,6 +55,10 @@ pagehelper:
   reasonable: true
   support-methods-arguments: true
   params: count=countSql
+
+jasypt:
+  encryptor:
+    password: YlhsemNXdyUzRA==
 
 logging:
   level:
