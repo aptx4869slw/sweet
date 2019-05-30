@@ -1280,7 +1280,7 @@ input[type="search"]::-webkit-search-decoration {
 
 .container {
     position: relative;
-    background: #fff;
+    background: #f9f9f9;
     padding: 60px 0 20px
 }
 
