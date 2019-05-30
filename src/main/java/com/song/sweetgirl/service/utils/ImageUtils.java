@@ -23,6 +23,7 @@ package com.song.sweetgirl.service.utils;
 import com.aliyun.oss.OSSClient;
 import com.aliyun.oss.model.ObjectMetadata;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
@@ -32,7 +33,7 @@ import java.net.URL;
 @Component
 public class ImageUtils {
 
-    private final org.slf4j.Logger logger = LoggerFactory.getLogger(ImageUtils.class);
+    private final Logger logger = LoggerFactory.getLogger(ImageUtils.class);
 
     // endpoint是访问OSS的域名。如果您已经在OSS的控制台上 创建了Bucket，请在控制台上查看域名。
     // 如果您还没有创建Bucket，endpoint选择请参看文档中心的“开发人员指南 > 基本概念 > 访问域名”，

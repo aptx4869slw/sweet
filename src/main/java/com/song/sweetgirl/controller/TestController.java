@@ -3,12 +3,14 @@ package com.song.sweetgirl.controller;
 import com.song.sweetgirl.controller.vm.PageVM;
 import com.song.sweetgirl.service.TestService;
 import com.song.sweetgirl.service.dto.TestDTO;
+import com.song.sweetgirl.service.utils.ImageUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.net.URI;
 import java.util.List;
@@ -21,6 +23,9 @@ public class TestController {
 
     @Autowired
     private TestService testService;
+
+    @Autowired
+    private ImageUtils imageUtils;
 
     @PostMapping(path = {"/test"})
     public ResponseEntity<TestDTO> save(@RequestBody TestDTO testDTO) {
@@ -78,6 +83,18 @@ public class TestController {
             return ResponseEntity.status(HttpStatus.OK).body(result);
         } catch (Exception e) {
             logger.error("REST request to delete Test :{}" + e.getMessage());
+            return new ResponseEntity(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PostMapping("/image_upload")
+    public ResponseEntity<String> saveImage1(@RequestParam("file") MultipartFile file) {
+        try {
+            logger.debug("REST request to save images1 : {},{}", file.getName(), file.getContentType());
+            String url = imageUtils.upload(file.getContentType(), file.getBytes());
+            return ResponseEntity.created(new URI("/api/image_upload")).body(url);
+        } catch (Exception e) {
+            logger.error("REST request to upload Image :{}" + e.getMessage());
             return new ResponseEntity(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
