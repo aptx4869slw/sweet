@@ -1,6 +1,7 @@
 package com.song.sweetgirl;
 
 import com.song.sweetgirl.controller.vm.PageVM;
+import com.song.sweetgirl.dao.TestDao;
 import com.song.sweetgirl.service.TestService;
 import com.song.sweetgirl.service.dto.TestDTO;
 import org.junit.Test;
@@ -24,7 +25,8 @@ public class SweetgirlApplicationTests {
     @Autowired
     TestService testService;
 
-    private final static Long id = 10086L;
+    @Autowired
+    TestDao testDao;
 
     private final static Boolean boo = Boolean.TRUE;
 
@@ -62,8 +64,8 @@ public class SweetgirlApplicationTests {
     @Test
     @Transactional
     public void findOne() throws Exception {
-        TestDTO testDTO = testService.findOne(id);
-        assertThat(testDTO.getId()).isEqualTo(id);
+        com.song.sweetgirl.model.Test test = testDao.findFirstTest();
+        assertThat(test.getId()).isEqualTo(test.getId());
     }
 
     @Test
@@ -76,7 +78,8 @@ public class SweetgirlApplicationTests {
     @Test
     @Transactional
     public void delete() throws Exception {
-        Boolean flag = testService.delete(id);
+        com.song.sweetgirl.model.Test test = testDao.findFirstTest();
+        Boolean flag = testService.delete(test.getId());
         assertThat(flag).isTrue();
     }
 
@@ -84,7 +87,8 @@ public class SweetgirlApplicationTests {
     @Transactional
     public void update() throws Exception {
         TestDTO testDTO = createTestDTO();
-        testDTO.setId(id);
+        com.song.sweetgirl.model.Test test = testDao.findFirstTest();
+        testDTO.setId(test.getId());
         testDTO = testService.update(testDTO);
         assertThat(testDTO.getFlag()).isEqualTo(boo);
         assertThat(testDTO.getPrice()).isEqualTo(dec);
