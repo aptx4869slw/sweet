@@ -3,7 +3,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url : jdbc:mysql://127.0.0.1:3306/sweet_girl?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
     username : ENC(7Y1ASPSRVRnIsluHgSMFrw==)
-    password : ENC(51uMJKgSnH+mihXyFLSM+vRrz+pJptXJ)
+    password : ENC(zr1CAapZa43EhtHzHY03pQ==)
     generate-unique-name: false
     cache-prep-stmts: true
   redis:
@@ -58,14 +58,14 @@ pagehelper:
 
 jasypt:
   encryptor:
-    string-output-type: base64
+    iv-generator-classname: org.jasypt.salt.NoOpIVGenerator
+    salt-generator-classname: org.jasypt.salt.RandomSaltGenerator
     algorithm: PBEWithMD5AndDES
     pool-size: 1
     keyObtentionIterations: 1000
     provider-name:
     provider-class-name:
-    salt-generator-classname: org.jasypt.salt.RandomSaltGenerator
-    iv-generator-classname: org.jasypt.salt.NoOpIVGenerator
+    string-output-type: base64
     password: YlhsemNXdyUzRA==
 
 logging:
