@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>日志</title>
+    <title>旅行者的时间表</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="keywords" content="礼炆说"/>
     <meta name="description" content="礼炆说"/>
     <script type="text/javascript" src="./js/jquery.min.js"></script>
     <link rel="icon" type="image/x-icon" href="./images/favicon.ico"/>
+    <link rel="stylesheet" type="text/css" href="./css/journal.css" media="all"/>
     <link rel="stylesheet" type="text/css" href="./css/blog.css" media="all"/>
 </head>
 
@@ -72,15 +73,105 @@
                 <path class="medium right" d="M100 100 L50 50 L100 33.3" fill="rgba(255,255,255, .3)"></path>
                 <path class="small left" d="M0 100 L50 50 L0 66.6" fill="rgba(255,255,255, .5)"></path>
                 <path class="small right" d="M100 100 L50 50 L100 66.6" fill="rgba(255,255,255, .5)"></path>
-                <path d="M0 99.9 L50 49.9 L100 99.9 L0 99.9" fill="rgba(255,255,255, 1)"></path>
-                <path d="M48 52 L50 49 L52 52 L48 52" fill="rgba(255,255,255, 1)"></path>
+                <path d="M0 99.9 L50 49.9 L100 99.9 L0 99.9" fill="#9cacc8"></path>
+                <path d="M48 52 L50 49 L52 52 L48 52" fill="#9cacc8"></path>
             </svg>
         </div>
     </div>
 </header>
 
+<section style="background: -webkit-linear-gradient(right, #8db9ca, #b09fc6)">
+    <section class="site-header">
+        <div class="wrapper">
+            <h1 class="site-header__title">旅行者的时间表</h1>
+        </div>
+    </section>
 
-<footer id="footer" class="overlay animated from-top">
+    <section class="timeline">
+        <div class="wrapper">
+            <div class="timeline__item timeline__item--0">
+                <div class="timeline__item__station"></div>
+                <div class="timeline__item__content">
+                    <h2 class="timeline__item__content__date">2019 May. 30</h2>
+                    <p class="timeline__item__content__description">所有页面基本完成，准备开始改造，放到后台数据库中去.</p>
+                </div>
+            </div>
+            <div class="timeline__item timeline__item--1">
+                <div class="timeline__item__station"></div>
+                <div class="timeline__item__content">
+                    <h2 class="timeline__item__content__date">2019 May. 28</h2>
+                    <p class="timeline__item__content__description">日志页面和数据库加密设置，同时优化页头页脚的色彩.</p>
+                </div>
+            </div>
+            <div class="timeline__item timeline__item--2">
+                <div class="timeline__item__station"></div>
+                <div class="timeline__item__content">
+                    <h2 class="timeline__item__content__date">2019 May. 27</h2>
+                    <p class="timeline__item__content__description">增加图片上传工具，将图片放至阿里云服务器上，轻量化War包.</p>
+                </div>
+            </div>
+            <div class="timeline__item timeline__item--3">
+                <div class="timeline__item__station"></div>
+                <div class="timeline__item__content">
+                    <h2 class="timeline__item__content__date">2019 May. 24</h2>
+                    <p class="timeline__item__content__description">编辑免责页面，和ReadMe的文案，样式.代码微调.</p>
+                </div>
+            </div>
+            <div class="timeline__item timeline__item--4">
+                <div class="timeline__item__station"></div>
+                <div class="timeline__item__content">
+                    <h2 class="timeline__item__content__date">2019 May. 22</h2>
+                    <p class="timeline__item__content__description">
+                        数据格式化，代码优化，添加模板页面，1.0版本正式上线.还是挺紧张的，成功上线就能发给朋友秀一哈.</p>
+                </div>
+            </div>
+            <div class="timeline__item timeline__item--5">
+                <div class="timeline__item__station"></div>
+                <div class="timeline__item__content">
+                    <h2 class="timeline__item__content__date">2019 May. 20</h2>
+                    <p class="timeline__item__content__description">Test增删查改，分页，Redis缓存.</p>
+                </div>
+            </div>
+            <div class="timeline__item timeline__item--6">
+                <div class="timeline__item__station"></div>
+                <div class="timeline__item__content">
+                    <h2 class="timeline__item__content__date">2019 May. 17</h2>
+                    <p class="timeline__item__content__description">登陆注册，定时器清理数据.</p>
+                </div>
+            </div>
+            <div class="timeline__item timeline__item--7">
+                <div class="timeline__item__station"></div>
+                <div class="timeline__item__content">
+                    <h2 class="timeline__item__content__date">2019 May. 16</h2>
+                    <p class="timeline__item__content__description">登陆页面，博客首页，明细页面等.</p>
+                </div>
+            </div>
+            <div class="timeline__item timeline__item--8">
+                <div class="timeline__item__station"></div>
+                <div class="timeline__item__content">
+                    <h2 class="timeline__item__content__date">2019 May. 15</h2>
+                    <p class="timeline__item__content__description">配置环境，添加依赖等.</p>
+                </div>
+            </div>
+            <div class="timeline__item timeline__item--9">
+                <div class="timeline__item__station"></div>
+                <div class="timeline__item__content">
+                    <h2 class="timeline__item__content__date">2019 May. 8</h2>
+                    <p class="timeline__item__content__description">购买阿里云服务器，配置开发环境.</p>
+                </div>
+            </div>
+            <div class="timeline__item timeline__item--10">
+                <div class="timeline__item__station"></div>
+                <div class="timeline__item__content">
+                    <h2 class="timeline__item__content__date">2019 May. 5</h2>
+                    <p class="timeline__item__content__description">开始有了我自己的想法，准备开干.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>
+
+<footer id="footer" class="overlay animated from-top" style="bottom: 30px">
     <div class="decor-wrapper">
         <svg id="footer-decor" class="decor top" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 100 100"
              preserveAspectRatio="none">
@@ -90,8 +181,8 @@
             <path class="medium right" d="M100 0 L50 50 L100 66.6" fill="rgba(255,255,255, .3)"></path>
             <path class="small left" d="M0 0 L50 50 L0 33.3" fill="rgba(255,255,255, .5)"></path>
             <path class="small right" d="M100 0 L50 50 L100 33.3" fill="rgba(255,255,255, .5)"></path>
-            <path d="M0 0 L50 50 L100 0 L0 0" fill="rgba(255,255,255, 1)"></path>
-            <path d="M48 48 L50 51 L52 48 L48 48" fill="rgba(255,255,255, 1)"></path>
+            <path d="M0 0 L50 50 L100 0 L0 0" fill="#9cacc8"></path>
+            <path d="M48 48 L50 51 L52 48 L48 48" fill="#9cacc8"></path>
         </svg>
     </div>
     <div class="socialize" data-aos="zoom-in">
@@ -118,5 +209,24 @@
     <script type="text/javascript" src="./js/plugins.js"></script>
     <script type="text/javascript" src="./js/particles.js"></script>
 </footer>
+<script>
+    function customWayPoint(className, addClassName, customOffset) {
+        var waypoints = $(className).waypoint({
+            handler: function (direction) {
+                if (direction == "down") {
+                    $(className).addClass(addClassName);
+                } else {
+                    $(className).removeClass(addClassName);
+                }
+            },
+            offset: customOffset
+        });
+    }
+
+    var defaultOffset = '50%';
+    for (i = 0; i < 17; i++) {
+        customWayPoint('.timeline__item--' + i, 'timeline__item-bg', defaultOffset);
+    }
+</script>
 </body>
 </html>
