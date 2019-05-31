@@ -29,7 +29,7 @@ spring:
   thymeleaf:
     cache: false
     encoding: UTF-8
-    mode: LEGACYHTML5
+    mode: HTML
     suffix: .html
     prefix: classpath:/templates/
     check-template-location: true
