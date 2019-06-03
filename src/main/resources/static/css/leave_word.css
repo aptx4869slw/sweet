@@ -15,6 +15,10 @@ input:focus {
     border-color: #A2ACB3;
 }
 
+.input_section {
+    height: 8%;
+}
+
 input.keyup {
     color: white;
     border-color: white;
@@ -71,4 +75,9 @@ input:focus::-moz-placeholder {
 
 input:focus:-ms-input-placeholder {
     opacity: .5;
+}
+
+.input_send {
+    width: 50%;
+    border: 3px solid;
 }

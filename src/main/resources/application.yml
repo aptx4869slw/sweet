@@ -58,14 +58,14 @@ pagehelper:
 
 jasypt:
   encryptor:
-    iv-generator-classname: org.jasypt.salt.NoOpIVGenerator
-    salt-generator-classname: org.jasypt.salt.RandomSaltGenerator
+    string-output-type: base64
     algorithm: PBEWithMD5AndDES
     pool-size: 1
     keyObtentionIterations: 1000
     provider-name:
     provider-class-name:
-    string-output-type: base64
+    salt-generator-classname: org.jasypt.salt.RandomSaltGenerator
+    iv-generator-classname: org.jasypt.salt.NoOpIVGenerator
     password: YlhsemNXdyUzRA==
 
 logging:
