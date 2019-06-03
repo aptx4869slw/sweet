@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface TestDao {
+public interface TestDAO {
 
     Integer save(Test test);
 

@@ -1,7 +1,7 @@
 package com.song.sweetgirl;
 
 import com.song.sweetgirl.controller.vm.PageVM;
-import com.song.sweetgirl.dao.TestDao;
+import com.song.sweetgirl.dao.TestDAO;
 import com.song.sweetgirl.service.TestService;
 import com.song.sweetgirl.service.dto.TestDTO;
 import org.junit.Test;
@@ -9,7 +9,6 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
@@ -26,7 +25,7 @@ public class SweetgirlApplicationTests {
     TestService testService;
 
     @Autowired
-    TestDao testDao;
+    TestDAO testDAO;
 
     private final static Boolean boo = Boolean.TRUE;
 
@@ -64,7 +63,7 @@ public class SweetgirlApplicationTests {
     @Test
     @Transactional
     public void findOne() throws Exception {
-        com.song.sweetgirl.model.Test test = testDao.findFirstTest();
+        com.song.sweetgirl.model.Test test = testDAO.findFirstTest();
         assertThat(test.getId()).isEqualTo(test.getId());
     }
 
@@ -78,7 +77,7 @@ public class SweetgirlApplicationTests {
     @Test
     @Transactional
     public void delete() throws Exception {
-        com.song.sweetgirl.model.Test test = testDao.findFirstTest();
+        com.song.sweetgirl.model.Test test = testDAO.findFirstTest();
         Boolean flag = testService.delete(test.getId());
         assertThat(flag).isTrue();
     }
@@ -87,7 +86,7 @@ public class SweetgirlApplicationTests {
     @Transactional
     public void update() throws Exception {
         TestDTO testDTO = createTestDTO();
-        com.song.sweetgirl.model.Test test = testDao.findFirstTest();
+        com.song.sweetgirl.model.Test test = testDAO.findFirstTest();
         testDTO.setId(test.getId());
         testDTO = testService.update(testDTO);
         assertThat(testDTO.getFlag()).isEqualTo(boo);

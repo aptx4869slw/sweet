@@ -3,7 +3,7 @@ package com.song.sweetgirl.service;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.song.sweetgirl.controller.vm.PageVM;
-import com.song.sweetgirl.dao.TestDao;
+import com.song.sweetgirl.dao.TestDAO;
 import com.song.sweetgirl.model.Test;
 import com.song.sweetgirl.service.dto.TestDTO;
 import org.modelmapper.ModelMapper;
@@ -31,7 +31,7 @@ public class TestService {
     private final Logger logger = LoggerFactory.getLogger(TestService.class);
 
     @Autowired
-    private TestDao testDao;
+    private TestDAO testDAO;
 
     private ModelMapper mapper = new ModelMapper();
 
@@ -45,7 +45,7 @@ public class TestService {
     @CachePut(value = "save", key = "#result.id", unless = "#result eq null")
     public TestDTO save(TestDTO testDTO) throws ServerException {
         Test test = mapper.map(testDTO, Test.class);
-        Integer count = testDao.save(test);
+        Integer count = testDAO.save(test);
         if (count > 0) {
             return mapper.map(test, TestDTO.class);
         } else {
@@ -63,7 +63,7 @@ public class TestService {
      */
     @Cacheable(value = "findOne", key = "#p0", unless = "#result eq null")
     public TestDTO findOne(Long id) throws ServerException {
-        Test test = testDao.findOne(id);
+        Test test = testDAO.findOne(id);
         if (test == null) {
             logger.debug("The test is not exist! :{}", id);
             throw new ServerException("The test is not exist!");
@@ -84,10 +84,10 @@ public class TestService {
     public List<TestDTO> findAll(PageVM page) {
         Page<Test> pageResult;
         if (page.getPageNum() == null || page.getPageSize() == null) {
-            pageResult = testDao.findAll();
+            pageResult = testDAO.findAll();
         } else {
             PageHelper.startPage(page.getPageNum(), page.getPageSize());
-            pageResult = testDao.findAllByPage();
+            pageResult = testDAO.findAllByPage();
         }
         List<TestDTO> result = mapper.map(pageResult, new TypeToken<List<TestDTO>>() {
         }.getType());
@@ -104,13 +104,13 @@ public class TestService {
      */
     @CachePut(value = "update", key = "#result.id", unless = "#result eq null")
     public TestDTO update(TestDTO testDTO) throws ServerException {
-        Test test = testDao.findOne(testDTO.getId());
+        Test test = testDAO.findOne(testDTO.getId());
         if (test == null) {
             logger.debug("The test is not exist! :{}", testDTO.getId());
             throw new ServerException("The test is not exist!");
         }
         test = mapper.map(testDTO, Test.class);
-        Integer count = testDao.update(test);
+        Integer count = testDAO.update(test);
         if (count > 0) {
             return mapper.map(test, TestDTO.class);
         } else {
@@ -128,7 +128,7 @@ public class TestService {
      */
     @CacheEvict(value = "delete", key = "#id", allEntries = true)
     public Boolean delete(Long id) throws ServerException {
-        Integer count = testDao.delete(id);
+        Integer count = testDAO.delete(id);
         if (count > 0) {
             return Boolean.TRUE;
         } else {
@@ -143,10 +143,10 @@ public class TestService {
     @Transactional
     public void testTimer() {
         final Integer total = 100;
-        Integer count = testDao.countTests();
+        Integer count = testDAO.countTests();
         if (count > total) {
-            Test test = testDao.findFirstTest();
-            Integer num = testDao.delete(test.getId());
+            Test test = testDAO.findFirstTest();
+            Integer num = testDAO.delete(test.getId());
             if (num > 0) {
                 logger.info(test.toString());
             }

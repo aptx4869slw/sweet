@@ -88,13 +88,13 @@ public class TestController {
     }
 
     @PostMapping("/image_upload")
-    public ResponseEntity<String> saveImage1(@RequestParam("file") MultipartFile file) {
+    public ResponseEntity<String> uploadImage(@RequestParam("file") MultipartFile file) {
         try {
-            logger.debug("REST request to save images1 : {},{}", file.getName(), file.getContentType());
+            logger.debug("REST request to upload Images : {},{}", file.getName(), file.getContentType());
             String url = imageUtils.upload(file.getContentType(), file.getBytes());
             return ResponseEntity.created(new URI("/api/image_upload")).body(url);
         } catch (Exception e) {
-            logger.error("REST request to upload Image :{}" + e.getMessage());
+            logger.error("REST request to upload Images :{}" + e.getMessage());
             return new ResponseEntity(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

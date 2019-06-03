@@ -5,13 +5,15 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="keywords" content="礼炆说"/>
     <meta name="description" content="礼炆说"/>
-    <script type="text/javascript" src="./js/jquery.min.js"></script>
     <link rel="icon" type="image/x-icon" href="./images/favicon.ico"/>
+    <script type="text/javascript" src="./js/jquery.min.js"></script>
+    <script type="text/javascript" src="./js/jquery.barrager.min.js"></script>
     <link rel="stylesheet" type="text/css" href="./css/blog.css" media="all"/>
+    <link rel="stylesheet" type="text/css" href="./css/barrager.css" media="all">
     <link rel="stylesheet" type="text/css" href="./css/leave_word.css" media="all"/>
 </head>
 
-<body>
+<body class="bb-js">
 <div class="Yarn_Background"
      style="background-image: url(http://sweet-girl-bucket.oss-cn-shanghai.aliyuncs.com/backgroundimage.jpg);"></div>
 <div class="navi" data-aos="fade-down">
@@ -63,16 +65,13 @@
         <h3 class="blog-description"><p>Liwen's Blog</p></h3>
     </div>
 </header>
-<section style="width: 100%; height: 60%">
-
-</section>
+<section class="barrage_area" style="width: 100%; height: 60%"></section>
 <section class="input_section">
     <form class="input_form">
         <input class="input_send" style="width: 50%; border:3px solid" type="text" placeholder="准备发射弹幕..."/>
-        <input type="button" value="发射" class="btn" onclick="alert('BOOM!')" style="margin-bottom: 5px">
+        <input type="button" value="发射" class="btn" onclick="sendBarrage()" style="margin-bottom: 5px">
     </form>
 </section>
-<footer></footer>
 <script type="text/javascript" src="./js/aos.js"></script>
 <script type="text/javascript" src="./js/blog.js"></script>
 <script type="text/javascript" src="./js/plugins.js"></script>

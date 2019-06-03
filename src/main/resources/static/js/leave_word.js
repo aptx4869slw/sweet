@@ -1,3 +1,5 @@
+window.onload = showBarrage();
+
 var MAX_LIFE = 50;
 var canvas = document.querySelector('canvas');
 var input = document.querySelector('input');
@@ -10,16 +12,18 @@ caret.style.left = 0;
 caret.style.top = 0;
 caret.style.width = 'auto';
 caret.style.visibility = 'hidden';
+
 document.body.appendChild(caret);
 
 function reposition() {
     field = input.getBoundingClientRect();
+
 }
 
 window.onload = reposition;
 window.onresize = reposition;
-reposition();
 
+reposition();
 input.onfocus = function () {
     hasFocus = true
 }
@@ -27,8 +31,61 @@ input.onblur = function () {
     hasFocus = false
 }
 
-function rain() {
+function showBarrage() {
+    $.getJSON('/api/barrages', function (data) {
+        var looper_time = 1000;
+        var items = data;
+        var total = data.length;
+        var run_once = true;
+        var index = 0;
+        barrager();
 
+        function barrager() {
+            if (run_once) {
+                looper = setInterval(barrager, looper_time);
+                run_once = false;
+            }
+            $('body').barrager(items[index]);
+            index++;
+            if (index == total) {
+                clearInterval(looper);
+                return false;
+            }
+        }
+    });
+}
+
+function sendBarrage() {
+    var barrage = $(".input_send").val();
+    var barrageJson = {
+        img: './images/barrage-logo.jpeg',
+        info: barrage + "&nbsp;&nbsp;&nbsp;",
+        href: 'javascript:void(0);',
+        close: false,
+        speed: Math.floor(Math.random() * 10 + 1) + 5,
+        color: '#FFC1C1',
+        old_ie_color: '#FFC1C1'
+    };
+    $(".input_send").val("");
+
+    $('.barrage_area').barrager(barrageJson);
+
+    saveBarrage(JSON.stringify(barrageJson));
+}
+
+function saveBarrage(data) {
+    let url = "/api/barrage";
+    let request = new XMLHttpRequest();
+    request.open("post", url, true);
+    request.setRequestHeader("Content-type", "application/json");
+    request.send(data);
+    request.onreadystatechange = function (res) {
+        if (request.readyState == 4) {
+            if (request.status == 200) {
+                console.log(JSON.parse(request.responseText))
+            }
+        }
+    }
 }
 
 function burst(intensity) {
@@ -128,50 +185,37 @@ function burst(intensity) {
 simulate(
     '2d', {
         init: function () {
-
         },
         tick: function (particles) {
-
             if (!particles) {
                 return;
             }
-
             particles.forEach(function (p) {
-
                 if (p.life > MAX_LIFE) {
                     this.destroy(p);
                 }
-
             });
-
         },
         beforePaint: function () {
             this.clear();
         },
         paint: function (particle) {
-
             var p = particle.position;
             var s = particle.size;
             var o = 1 - (particle.life / MAX_LIFE);
-
             this.paint.circle(p.x, p.y, s, 'rgba(255,255,255,' + o + ')');
             this.paint.circle(p.x, p.y, s + 2, 'rgba(231,244,255,' + (o * .25) + ')');
-
         },
         afterPaint: function () {
             // nothing
         },
         action: function (x, y) {
-
             caret.textContent = input.value;
-
             burst.call(this, 10);
-
             input.classList.add('keyup');
             setTimeout(function () {
                 input.classList.remove('keyup')
             }, 100);
-
         }
     }
 );
@@ -312,17 +356,13 @@ Vector.prototype = {
  * Particle Class
  */
 function Particle(id, group, position, velocity, size, life, behavior) {
-
     this._id = id || 'default';
     this._group = group || 'default';
-
     this._position = position || new Vector();
     this._velocity = velocity || new Vector();
     this._size = size || 1;
     this._life = Math.round(life || 0);
-
     this._behavior = behavior || [];
-
 }
 
 Particle.prototype = {
@@ -348,16 +388,12 @@ Particle.prototype = {
         return this._velocity;
     },
     update: function (stage) {
-
         this._life++;
-
         var i = 0;
         var l = this._behavior.length;
-
         for (; i < l; i++) {
             this._behavior[i].call(stage, this);
         }
-
     },
     toString: function () {
         return 'Particle(' + this._id + ') ' + this._life + ' pos: ' + this._position + ' vec: ' + this._velocity;
@@ -366,7 +402,6 @@ Particle.prototype = {
 
 // setup DOM
 function simulate(dimensions, options) {
-
     // private vars
     var particles = [];
     var destroyed = [];
@@ -426,30 +461,24 @@ function simulate(dimensions, options) {
 
     // create canvas for drawing
     function setup() {
-
         // create
         canvas = document.createElement('canvas');
         document.body.appendChild(canvas);
-
         // correct canvas size on window resize
         window.addEventListener('resize', fitCanvas);
-
         // go
         go();
     }
 
     // canvas has been attached, let's go!
     function go() {
-
         // set initial canvas size
         fitCanvas();
-
         // get context for drawing
         context = canvas.getContext(dimensions);
 
         // simulation update loop
         function act() {
-
             // update particle states
             var i = 0;
             var l = particles.length;
@@ -457,48 +486,36 @@ function simulate(dimensions, options) {
             for (; i < l; i++) {
                 particles[i].update(this);
             }
-
             // clean destroyed particles
             while (p = destroyed.pop()) {
-
                 do {
-
                     // has not been found in destroyed array?
                     if (p !== particles[i]) {
                         continue;
                     }
-
                     // remove particle
                     particles.splice(i, 1);
-
                 } while (i-- >= 0)
             }
-
             // repaint context
             options.beforePaint.call(this);
-
             // repaint particles
             i = 0;
             l = particles.length;
             for (; i < l; i++) {
                 options.paint.call(this, particles[i]);
             }
-
             // after particles have been painted
             options.afterPaint.call(this);
         }
 
         function tick() {
-
             // call update method, this allows for inserting particles later on
             options.tick.call(this, particles);
-
             // update particles here
             act();
-
             // on to the next frame
             window.requestAnimationFrame(tick);
-
         }
 
         /**
@@ -766,15 +783,12 @@ function simulate(dimensions, options) {
 
                         totalForce.add(force);
                     }
-
                     totalForce.multiply(forceMultiplier);
-
                     particle.velocity.add(totalForce);
                 }
             },
             wrap: function (margin) {
                 return function (particle) {
-
                     // move around when particle reaches edge of screen
                     var position = particle.position;
                     var radius = particle.size * .5;
@@ -885,7 +899,6 @@ function simulate(dimensions, options) {
         document.addEventListener('keyup', function (e) {
             options.action.call(self, e.pageX, e.pageY);
         });
-
     }
 
 };

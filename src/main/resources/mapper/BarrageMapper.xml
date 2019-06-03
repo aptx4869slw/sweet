@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.song.sweetgirl.dao.BarrageDAO">
+    <resultMap id="BaseResultMap" type="com.song.sweetgirl.model.Barrage">
+        <result property="id" column="id" jdbcType="BIGINT"/>
+        <result property="createdDate" column="created_date" jdbcType="TIMESTAMP"/>
+        <result property="img" column="img" jdbcType="VARCHAR"/>
+        <result property="info" column="info" jdbcType="VARCHAR"/>
+        <result property="href" column="href" jdbcType="VARCHAR"/>
+        <result property="close" column="close" jdbcType="BIT"/>
+        <result property="speed" column="speed" jdbcType="INTEGER"/>
+        <result property="color" column="color" jdbcType="VARCHAR"/>
+        <result property="old_ie_color" column="old_ie_color" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, created_date, img, info, href, close, speed, color, old_ie_color
+    </sql>
+
+    <insert id="save" parameterType="com.song.sweetgirl.model.Barrage" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO Barrage (id, created_date, img, info, href, close, speed, color, old_ie_color)
+        VALUES(#{id}, #{createdDate}, #{img}, #{info}, #{href}, #{close}, #{speed}, #{color}, #{old_ie_color})
+    </insert>
+
+    <select id="findOne" resultMap="BaseResultMap" parameterType="Long">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM Barrage
+        WHERE id = #{id}
+    </select>
+
+    <select id="findAll" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM Barrage
+    </select>
+
+    <select id="findAllByPage" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM Barrage
+    </select>
+
+    <delete id="delete" parameterType="Long">
+        DELETE FROM Barrage
+        WHERE id = #{id}
+    </delete>
+
+</mapper>
