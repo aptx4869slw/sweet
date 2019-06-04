@@ -45,6 +45,8 @@ server:
   session-timeout: 30
   tomcat.max-threads: 0
   tomcat.uri-encoding: UTF-8
+  servlet:
+    context-path:
 
 mybatis:
   type-aliases-package: com.song.sweetgirl.model
