@@ -91,7 +91,7 @@ public class TestService {
         }
         List<TestDTO> result = mapper.map(pageResult, new TypeToken<List<TestDTO>>() {
         }.getType());
-        result.sort(Comparator.comparing(TestDTO::getLocalDateTime));
+        result.sort(Comparator.comparing(TestDTO::getLocalDateTime).reversed());
         return result;
     }
 

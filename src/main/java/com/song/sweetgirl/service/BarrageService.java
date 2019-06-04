@@ -68,7 +68,7 @@ public class BarrageService {
         }
         List<BarrageDTO> result = mapper.map(pageResult, new TypeToken<List<BarrageDTO>>() {
         }.getType());
-        result.sort(Comparator.comparing(BarrageDTO::getCreatedDate));
+        result.sort(Comparator.comparing(BarrageDTO::getCreatedDate).reversed());
         return result;
     }
 
