@@ -22,18 +22,6 @@ public class BarrageController {
     @Autowired
     private BarrageService barrageService;
 
-    @GetMapping("/barrages")
-    public ResponseEntity<List<BarrageDTO>> getBarrages(PageVM page) {
-        logger.debug("REST request to get barrages");
-        try {
-            List<BarrageDTO> result = barrageService.findBarrages(page);
-            return ResponseEntity.status(HttpStatus.OK).body(result);
-        } catch (Exception e) {
-            logger.error("REST request to get barrages :{}" + e.getMessage());
-            return new ResponseEntity(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
     @PostMapping(path = {"/barrage"}, consumes = "application/json")
     public ResponseEntity<BarrageDTO> saveBarrage(@RequestBody BarrageDTO barrageDTO) {
         logger.debug("REST request to save a barrage :{}", barrageDTO.toString());
@@ -42,6 +30,18 @@ public class BarrageController {
             return ResponseEntity.created(new URI("/api/barrage/" + barrageDTO.getId())).body(barrageDTO);
         } catch (Exception e) {
             logger.error("REST request to save a barrage :{}" + e.getMessage());
+            return new ResponseEntity(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/barrages")
+    public ResponseEntity<List<BarrageDTO>> getBarrages(PageVM page) {
+        logger.debug("REST request to get barrages");
+        try {
+            List<BarrageDTO> result = barrageService.findBarrages(page);
+            return ResponseEntity.status(HttpStatus.OK).body(result);
+        } catch (Exception e) {
+            logger.error("REST request to get barrages :{}" + e.getMessage());
             return new ResponseEntity(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

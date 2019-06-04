@@ -57,7 +57,7 @@ public class BarrageService {
      *
      * @return
      */
-    @Cacheable(value = "findBarrages", unless = "#result eq null")
+    @Cacheable(value = "Barrages", unless = "#result eq null")
     public List<BarrageDTO> findBarrages(PageVM page) {
         Page<Barrage> pageResult;
         if (page.getPageNum() == null || page.getPageSize() == null) {
