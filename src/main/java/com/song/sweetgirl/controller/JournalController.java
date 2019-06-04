@@ -38,8 +38,8 @@ public class JournalController {
     public ResponseEntity<List<JournalDTO>> getJournals(PageVM page) {
         logger.debug("REST request to get Journals");
         try {
-            List<JournalDTO> result = journalService.getJournals(page);
-            return ResponseEntity.status(HttpStatus.OK).body(result);
+            List<JournalDTO> results = journalService.getJournals(page);
+            return ResponseEntity.status(HttpStatus.OK).body(results);
         } catch (Exception e) {
             logger.error("REST request to get Journals :{}" + e.getMessage());
             return new ResponseEntity(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);

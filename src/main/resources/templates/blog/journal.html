@@ -12,7 +12,8 @@
 </head>
 
 <body>
-<div class="Yarn_Background" style="background-image: url(http://sweet-girl-bucket.oss-cn-shanghai.aliyuncs.com/backgroundimage.jpg);"></div>
+<div class="Yarn_Background"
+     style="background-image: url(http://sweet-girl-bucket.oss-cn-shanghai.aliyuncs.com/backgroundimage.jpg);"></div>
 <div class="navi" data-aos="fade-down">
     <div class="bt-nav">
         <div class="line line1"></div>
@@ -55,7 +56,8 @@
     <div class="site-branding text-center">
         <a href="/blog">
             <figure>
-                <img class="custom-logo avatar" src="http://sweet-girl-bucket.oss-cn-shanghai.aliyuncs.com/omikron.png"/>
+                <img class="custom-logo avatar"
+                     src="http://sweet-girl-bucket.oss-cn-shanghai.aliyuncs.com/omikron.png"/>
             </figure>
         </a>
         <h3 class="blog-description"><p>Liwen's Blog</p></h3>
@@ -86,88 +88,8 @@
             <h1 class="site-header__title">旅行者的时间表</h1>
         </div>
     </section>
-
     <section class="timeline">
-        <div class="wrapper">
-            <div class="timeline__item timeline__item--0">
-                <div class="timeline__item__station"></div>
-                <div class="timeline__item__content">
-                    <h2 class="timeline__item__content__date">2019 May. 30</h2>
-                    <p class="timeline__item__content__description">所有页面基本完成，准备开始改造，放到后台数据库中去.</p>
-                </div>
-            </div>
-            <div class="timeline__item timeline__item--1">
-                <div class="timeline__item__station"></div>
-                <div class="timeline__item__content">
-                    <h2 class="timeline__item__content__date">2019 May. 28</h2>
-                    <p class="timeline__item__content__description">日志页面和数据库加密设置，同时优化页头页脚的色彩.</p>
-                </div>
-            </div>
-            <div class="timeline__item timeline__item--2">
-                <div class="timeline__item__station"></div>
-                <div class="timeline__item__content">
-                    <h2 class="timeline__item__content__date">2019 May. 27</h2>
-                    <p class="timeline__item__content__description">增加图片上传工具，将图片放至阿里云服务器上，轻量化War包.</p>
-                </div>
-            </div>
-            <div class="timeline__item timeline__item--3">
-                <div class="timeline__item__station"></div>
-                <div class="timeline__item__content">
-                    <h2 class="timeline__item__content__date">2019 May. 24</h2>
-                    <p class="timeline__item__content__description">编辑免责页面，和ReadMe的文案，样式.代码微调.</p>
-                </div>
-            </div>
-            <div class="timeline__item timeline__item--4">
-                <div class="timeline__item__station"></div>
-                <div class="timeline__item__content">
-                    <h2 class="timeline__item__content__date">2019 May. 22</h2>
-                    <p class="timeline__item__content__description">
-                        数据格式化，代码优化，添加模板页面，1.0版本正式上线.还是挺紧张的，成功上线就能发给朋友秀一哈.</p>
-                </div>
-            </div>
-            <div class="timeline__item timeline__item--5">
-                <div class="timeline__item__station"></div>
-                <div class="timeline__item__content">
-                    <h2 class="timeline__item__content__date">2019 May. 20</h2>
-                    <p class="timeline__item__content__description">Test增删查改，分页，Redis缓存.</p>
-                </div>
-            </div>
-            <div class="timeline__item timeline__item--6">
-                <div class="timeline__item__station"></div>
-                <div class="timeline__item__content">
-                    <h2 class="timeline__item__content__date">2019 May. 17</h2>
-                    <p class="timeline__item__content__description">添加登陆注册页面，添加定时器清理数据.</p>
-                </div>
-            </div>
-            <div class="timeline__item timeline__item--7">
-                <div class="timeline__item__station"></div>
-                <div class="timeline__item__content">
-                    <h2 class="timeline__item__content__date">2019 May. 16</h2>
-                    <p class="timeline__item__content__description">登陆页面，博客首页，明细页面，相册页面等.</p>
-                </div>
-            </div>
-            <div class="timeline__item timeline__item--8">
-                <div class="timeline__item__station"></div>
-                <div class="timeline__item__content">
-                    <h2 class="timeline__item__content__date">2019 May. 15</h2>
-                    <p class="timeline__item__content__description">配置环境，添加依赖等.</p>
-                </div>
-            </div>
-            <div class="timeline__item timeline__item--9">
-                <div class="timeline__item__station"></div>
-                <div class="timeline__item__content">
-                    <h2 class="timeline__item__content__date">2019 May. 8</h2>
-                    <p class="timeline__item__content__description">购买阿里云服务器，配置开发环境.</p>
-                </div>
-            </div>
-            <div class="timeline__item timeline__item--10">
-                <div class="timeline__item__station"></div>
-                <div class="timeline__item__content">
-                    <h2 class="timeline__item__content__date">2019 May. 5</h2>
-                    <p class="timeline__item__content__description">开始有了我自己的想法，准备开干.</p>
-                </div>
-            </div>
-        </div>
+        <div class="wrapper" id="journal"></div>
     </section>
 </section>
 
@@ -208,25 +130,7 @@
     <script type="text/javascript" src="./js/blog.js"></script>
     <script type="text/javascript" src="./js/plugins.js"></script>
     <script type="text/javascript" src="./js/particles.js"></script>
+    <script type="text/javascript" src="./js/journal.js"></script>
 </footer>
-<script>
-    function customWayPoint(className, addClassName, customOffset) {
-        var waypoints = $(className).waypoint({
-            handler: function (direction) {
-                if (direction == "down") {
-                    $(className).addClass(addClassName);
-                } else {
-                    $(className).removeClass(addClassName);
-                }
-            },
-            offset: customOffset
-        });
-    }
-
-    var defaultOffset = '50%';
-    for (i = 0; i < 17; i++) {
-        customWayPoint('.timeline__item--' + i, 'timeline__item-bg', defaultOffset);
-    }
-</script>
 </body>
 </html>
