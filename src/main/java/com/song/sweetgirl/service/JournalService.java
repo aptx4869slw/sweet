@@ -12,12 +12,18 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.rmi.ServerException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 @Service
 @Transactional
@@ -30,6 +36,30 @@ public class JournalService {
 
     @Autowired
     private JournalDAO journalDAO;
+
+    /**
+     * 保存方法
+     *
+     * @param content
+     * @return
+     * @throws ServerException
+     */
+    @CachePut(value = "save", key = "#result.id", unless = "#result eq null")
+    public JournalDTO save(String content) throws ServerException {
+        Journal journal = new Journal();
+        journal.setContent(content);
+        journal.setCreatedDate(LocalDateTime.now());
+        String month = new SimpleDateFormat("MMM", Locale.ENGLISH).format(new Date());
+        String date = journal.getCreatedDate().getYear() + " " + month + ". " + journal.getCreatedDate().getDayOfMonth();
+        journal.setContentDate(date);
+        Integer count = journalDAO.save(journal);
+        if (count > 0) {
+            return mapper.map(journal, JournalDTO.class);
+        } else {
+            logger.debug("save failed!", journal);
+            throw new ServerException("save failed!");
+        }
+    }
 
     /**
      * 查询日志列表

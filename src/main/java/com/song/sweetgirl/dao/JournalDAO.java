@@ -7,6 +7,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface JournalDAO {
 
+    Integer save(Journal journal);
+
     Page<Journal> findAll();
 
     Page<Journal> findAllByPage();
