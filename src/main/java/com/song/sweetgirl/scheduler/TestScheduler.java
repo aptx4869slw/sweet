@@ -19,7 +19,7 @@ public class TestScheduler {
     @Autowired
     private TestService testService;
 
-    @Scheduled(fixedRate = 5000)
+    @Scheduled(fixedRate = 1000 * 60)
     public void timer() {
         logger.debug("Timer in progress! :{}", LocalDateTime.now());
         try {
