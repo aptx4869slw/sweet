@@ -4,6 +4,7 @@ spring:
     url : jdbc:mysql://127.0.0.1:3306/sweet_girl?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
     username : ENC(7Y1ASPSRVRnIsluHgSMFrw==)
     password : ENC(zr1CAapZa43EhtHzHY03pQ==)
+#    password : ENC(51uMJKgSnH+mihXyFLSM+vRrz+pJptXJ)
     generate-unique-name: false
     cache-prep-stmts: true
   redis:
