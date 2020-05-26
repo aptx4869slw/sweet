@@ -1,7 +1,7 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url : jdbc:mysql://127.0.0.1:3306/sweet_girl?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    url : jdbc:mysql://127.0.0.1:3306/sweet?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
     username : ENC(7Y1ASPSRVRnIsluHgSMFrw==)
     password : ENC(zr1CAapZa43EhtHzHY03pQ==)
 #    password : ENC(51uMJKgSnH+mihXyFLSM+vRrz+pJptXJ)
@@ -10,7 +10,7 @@ spring:
   redis:
     host: 127.0.0.1
     port: 6379
-    password: jmad252666
+    password: 123456
     database: 0
     jedis:
       pool:
