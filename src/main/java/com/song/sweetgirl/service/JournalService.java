@@ -38,7 +38,7 @@ public class JournalService {
     private JournalDAO journalDAO;
 
     /**
-     * 保存方法
+     * 保存日志
      *
      * @param content
      * @return
@@ -56,8 +56,8 @@ public class JournalService {
         if (count > 0) {
             return mapper.map(journal, JournalDTO.class);
         } else {
-            logger.debug("save failed!", journal);
-            throw new ServerException("save failed!");
+            logger.debug("Journal save failed!", journal);
+            throw new ServerException("Journal save failed!");
         }
     }
 

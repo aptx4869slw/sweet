@@ -4,6 +4,7 @@ import com.song.sweetgirl.controller.vm.PageVM;
 import com.song.sweetgirl.service.TestService;
 import com.song.sweetgirl.service.dto.TestDTO;
 import com.song.sweetgirl.service.utils.ImageUtils;
+import org.jasypt.encryption.StringEncryptor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,9 @@ public class TestController {
 
     @Autowired
     private ImageUtils imageUtils;
+
+    @Autowired
+    private StringEncryptor encryptor;
 
     @PostMapping(path = {"/test"})
     public ResponseEntity<TestDTO> save(@RequestBody TestDTO testDTO) {
@@ -97,6 +101,17 @@ public class TestController {
             logger.error("REST request to upload Images :{}" + e.getMessage());
             return new ResponseEntity(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    /**
+     * 加密方法
+     *
+     * @param pass 需加密文本
+     */
+    @GetMapping(path = {"/encrypt"})
+    public void testEncrypt(String pass) {
+        String encryptPass = encryptor.encrypt(pass);
+        logger.debug("The encrypted password is : {}---{}", pass, encryptPass);
     }
 
 }

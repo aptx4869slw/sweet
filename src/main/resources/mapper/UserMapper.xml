@@ -15,19 +15,19 @@
     <select id="findUser" resultMap="BaseResultMap" parameterType="com.song.sweetgirl.model.User">
         SELECT
         <include refid="Base_Column_List"/>
-        FROM User
+        FROM user
         WHERE username = #{username} AND password = #{password}
     </select>
 
     <select id="findByUserName" resultMap="BaseResultMap" parameterType="com.song.sweetgirl.model.User">
         SELECT
         <include refid="Base_Column_List"/>
-        FROM User
+        FROM user
         WHERE username = #{username}
     </select>
 
     <insert id="saveUser" parameterType="com.song.sweetgirl.model.User">
-        INSERT INTO User (username, password)
+        INSERT INTO user (username, password)
         VALUES(#{username}, #{password})
     </insert>
 

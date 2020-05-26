@@ -37,6 +37,12 @@ public class UserService {
         return UserStatus.LOGIN_FAILED.description();
     }
 
+    /**
+     * 注册
+     *
+     * @param user
+     * @return
+     */
     public String register(User user) throws Exception {
         User result = userDAO.findByUserName(user);
         if (result != null) {

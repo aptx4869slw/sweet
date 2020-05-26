@@ -34,7 +34,7 @@ public class BarrageService {
     private BarrageDAO barrageDAO;
 
     /**
-     * 保存方法
+     * 保存弹幕
      *
      * @param barrageDTO
      * @return
@@ -47,8 +47,8 @@ public class BarrageService {
         if (count > 0) {
             return mapper.map(barrage, BarrageDTO.class);
         } else {
-            logger.debug("save failed!", barrage);
-            throw new ServerException("save failed!");
+            logger.debug("Barrage save failed!", barrage);
+            throw new ServerException("Barrage save failed!");
         }
     }
 

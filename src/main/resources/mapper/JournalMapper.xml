@@ -14,31 +14,31 @@
     </sql>
 
     <insert id="save" parameterType="com.song.sweetgirl.model.Journal" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO Journal (id, created_date, content_date, content)
+        INSERT INTO journal (id, created_date, content_date, content)
         VALUES(#{id}, #{createdDate}, #{contentDate}, #{content})
     </insert>
 
     <select id="findOne" resultMap="BaseResultMap" parameterType="Long">
         SELECT
         <include refid="Base_Column_List"/>
-        FROM Journal
+        FROM journal
         WHERE id = #{id}
     </select>
 
     <select id="findAll" resultMap="BaseResultMap">
         SELECT
         <include refid="Base_Column_List"/>
-        FROM Journal
+        FROM journal
     </select>
 
     <select id="findAllByPage" resultMap="BaseResultMap">
         SELECT
         <include refid="Base_Column_List"/>
-        FROM Journal
+        FROM journal
     </select>
 
     <delete id="delete" parameterType="Long">
-        DELETE FROM Journal
+        DELETE FROM journal
         WHERE id = #{id}
     </delete>
 

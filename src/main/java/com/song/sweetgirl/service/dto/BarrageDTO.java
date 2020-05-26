@@ -1,5 +1,7 @@
 package com.song.sweetgirl.service.dto;
 
+import org.jsoup.Jsoup;
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -50,7 +52,7 @@ public class BarrageDTO implements Serializable {
     }
 
     public String getInfo() {
-        return info;
+        return info == null?null:Jsoup.parse(info).text();
     }
 
     public void setInfo(String info) {

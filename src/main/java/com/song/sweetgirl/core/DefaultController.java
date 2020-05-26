@@ -7,13 +7,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class DefaultController {
 
     @RequestMapping("/")
-    public String login() {
-        return "login";
-    }
-
-    @RequestMapping(value = "/blog")
     public String blog() {
         return "blog/blog";
+    }
+
+    @RequestMapping(value = "/login")
+    public String login() {
+        return "login";
     }
 
     @RequestMapping(value = "/search")

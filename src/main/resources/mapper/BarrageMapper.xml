@@ -19,31 +19,31 @@
     </sql>
 
     <insert id="save" parameterType="com.song.sweetgirl.model.Barrage" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO Barrage (id, created_date, img, info, href, close, speed, color, old_ie_color)
+        INSERT INTO barrage (id, created_date, img, info, href, close, speed, color, old_ie_color)
         VALUES(#{id}, #{createdDate}, #{img}, #{info}, #{href}, #{close}, #{speed}, #{color}, #{old_ie_color})
     </insert>
 
     <select id="findOne" resultMap="BaseResultMap" parameterType="Long">
         SELECT
         <include refid="Base_Column_List"/>
-        FROM Barrage
+        FROM barrage
         WHERE id = #{id}
     </select>
 
     <select id="findAll" resultMap="BaseResultMap">
         SELECT
         <include refid="Base_Column_List"/>
-        FROM Barrage
+        FROM barrage
     </select>
 
     <select id="findAllByPage" resultMap="BaseResultMap">
         SELECT
         <include refid="Base_Column_List"/>
-        FROM Barrage
+        FROM barrage
     </select>
 
     <delete id="delete" parameterType="Long">
-        DELETE FROM Barrage
+        DELETE FROM barrage
         WHERE id = #{id}
     </delete>
 

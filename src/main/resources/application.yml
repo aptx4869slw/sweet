@@ -69,8 +69,12 @@ jasypt:
     provider-class-name:
     salt-generator-classname: org.jasypt.salt.RandomSaltGenerator
     iv-generator-classname: org.jasypt.salt.NoOpIVGenerator
-    password: YlhsemNXdyUzRA==
+    password: a6d11ff4814488830abf582144cb5df3
 
 logging:
   level:
     com.song.sweetgirl.dao: debug
+
+gaode:
+  map:
+    api.key: 55a2c0fbef6fc7e5f5d9c40cf14536d1
