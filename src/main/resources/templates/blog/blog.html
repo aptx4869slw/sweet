@@ -5,13 +5,14 @@
     <title>Liwen个人博客</title>
     <meta name="keywords" content="礼炆说"/>
     <meta name="description" content="礼炆说"/>
-    <script type="text/javascript" src="https://sweet-girl-static.oss-cn-beijing.aliyuncs.com/jquery.min.js"></script>
     <link rel="icon" type="image/x-icon" href="./images/favicon.ico"/>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <script type="text/javascript" src="https://sweet-girl-static.oss-cn-beijing.aliyuncs.com/jquery.min.js"></script>
+    <script type="text/javascript" src="https://sweet-girl-static.oss-cn-beijing.aliyuncs.com/L2Dwidget.0.min.js"></script>
+    <script type="text/javascript" src="https://sweet-girl-static.oss-cn-beijing.aliyuncs.com/L2Dwidget.min.js"></script>
     <link rel="stylesheet" type="text/css" href="./css/blog.css" media="all"/>
+    <link rel="stylesheet" type="text/css" href="./css/sidebar.css" media="all"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <script type="text/javascript" charset="utf-8" src="https://sweet-girl-static.oss-cn-beijing.aliyuncs.com/L2Dwidget.0.min.js"></script>
-    <script type="text/javascript" charset="utf-8" src="https://sweet-girl-static.oss-cn-beijing.aliyuncs.com/L2Dwidget.min.js"></script>
     <script type="text/javascript">
         L2Dwidget.init({
             "display": {
@@ -23,10 +24,48 @@
                 "vOffset": 10
             }
         });
+
+        $(document).ready(function () {
+            $(".side ul li").hover(function () {
+                $(this).find(".sidebox").stop().animate({"width": "124px"}, 200).css({
+                    "opacity": "1",
+                    "filter": "Alpha(opacity=100)",
+                    "background": "#ae1c1c"
+                })
+            }, function () {
+                $(this).find(".sidebox").stop().animate({"width": "54px"}, 200).css({
+                    "opacity": "0.8",
+                    "filter": "Alpha(opacity=80)",
+                    "background": "#000"
+                })
+            });
+        });
+
+        function goTop() {
+            $('html,body').animate({'scrollTop': 0}, 600);
+        }
     </script>
 </head>
 
 <body class="home blog custom-background round-avatars">
+<div class="side">
+    <ul>
+        <li><a href="javascript:void(0);">
+            <div class="sidebox"><img src="./images/side_icon01.png">客服中心</div>
+        </a></li>
+        <li><a href="javascript:void(0);">
+            <div class="sidebox"><img src="./images/side_icon02.png">客户案例</div>
+        </a></li>
+        <li><a href="javascript:void(0);">
+            <div class="sidebox"><img src="./images/side_icon04.png">QQ客服</div>
+        </a></li>
+        <li><a href="javascript:void(0);">
+            <div class="sidebox"><img src="./images/side_icon03.png">新浪微博</div>
+        </a></li>
+        <li style="border:none;"><a href="javascript:goTop();" class="sidetop"><img src="./images/side_icon05.png"></a>
+        </li>
+    </ul>
+</div>
 <div class="Yarn_Background"
      style="background-image: url(http://sweet-girl-bucket.oss-cn-shanghai.aliyuncs.com/backgroundimage.jpg);"></div>
 <form class="js-search search-form search-form--modal" method="get" action="/search.html" role="search">
