@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.song.sweetgirl.dao.TestDAO">
-    <resultMap id="BaseResultMap" type="com.song.sweetgirl.model.Test">
+<mapper namespace="com.song.sweet.dao.TestDAO">
+    <resultMap id="BaseResultMap" type="com.song.sweet.model.Test">
         <result property="id" column="id" jdbcType="BIGINT"/>
         <result property="number" column="number" jdbcType="INTEGER"/>
         <result property="string" column="string" jdbcType="VARCHAR"/>
@@ -15,7 +15,7 @@
         id, number, string, price, flag, local_date_time
     </sql>
 
-    <insert id="save" parameterType="com.song.sweetgirl.model.Test" useGeneratedKeys="true" keyProperty="id">
+    <insert id="save" parameterType="com.song.sweet.model.Test" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO test (number, string, price, flag, local_date_time)
         VALUES(#{number}, #{string}, #{price}, #{flag}, #{localDateTime})
     </insert>
@@ -50,7 +50,7 @@
         SELECT COUNT(1) FROM test
     </select>
 
-    <update id="update" parameterType="com.song.sweetgirl.model.Test">
+    <update id="update" parameterType="com.song.sweet.model.Test">
         UPDATE test
         <trim prefix="set" suffixOverrides=",">
             <if test="number != null">

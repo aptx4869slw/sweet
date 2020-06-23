@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.song.sweetgirl.dao.BarrageDAO">
-    <resultMap id="BaseResultMap" type="com.song.sweetgirl.model.Barrage">
+<mapper namespace="com.song.sweet.dao.BarrageDAO">
+    <resultMap id="BaseResultMap" type="com.song.sweet.model.Barrage">
         <result property="id" column="id" jdbcType="BIGINT"/>
         <result property="createdDate" column="created_date" jdbcType="TIMESTAMP"/>
         <result property="img" column="img" jdbcType="VARCHAR"/>
@@ -18,7 +18,7 @@
         id, created_date, img, info, href, close, speed, color, old_ie_color
     </sql>
 
-    <insert id="save" parameterType="com.song.sweetgirl.model.Barrage" useGeneratedKeys="true" keyProperty="id">
+    <insert id="save" parameterType="com.song.sweet.model.Barrage" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO barrage (id, created_date, img, info, href, close, speed, color, old_ie_color)
         VALUES(#{id}, #{createdDate}, #{img}, #{info}, #{href}, #{close}, #{speed}, #{color}, #{old_ie_color})
     </insert>

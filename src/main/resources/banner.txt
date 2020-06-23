@@ -12,5 +12,5 @@ ${AnsiColor.BRIGHT_YELLOW}            ├──────┴─┬─┴─┬
 ${AnsiColor.BRIGHT_YELLOW}            │ Shift  │ Z │ X │ C │ V │ B │ N │ M │< ,│> .│? /│  Shift   │     │ ↑ │     │ 1 │ 2 │ 3 │   │
 ${AnsiColor.BRIGHT_YELLOW}            ├─────┬──┴─┬─┴──┬┴───┴───┴───┴───┴───┴──┬┴───┼───┴┬────┬────┤ ┌───┼───┼───┐ ├───┴───┼───┤ E││
 ${AnsiColor.BRIGHT_YELLOW}            │ Ctrl│ #  │Alt │         Space         │ Alt│  # │ FN │Ctrl│ │ ← │ ↓ │ → │ │   0   │ . │←─┘│
-${AnsiColor.BRIGHT_YELLOW}            └─────┴────┴────┴───────────────────────┴────┴────┴────┴────┘ └───┴───┴───┘ └───────┴───┴───┘     ${spring-boot.version}
-${AnsiBackground.BRIGHT_WHITE}
+${AnsiColor.BRIGHT_YELLOW}            └─────┴────┴────┴───────────────────────┴────┴────┴────┴────┘ └───┴───┴───┘ └───────┴───┴───┘
+${AnsiColor.BRIGHT_GREEN}                                                                                                                ${spring-boot.version}

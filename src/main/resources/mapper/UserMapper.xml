@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.song.sweetgirl.dao.UserDAO">
-    <resultMap id="BaseResultMap" type="com.song.sweetgirl.model.User">
+<mapper namespace="com.song.sweet.dao.UserDAO">
+    <resultMap id="BaseResultMap" type="com.song.sweet.model.User">
         <result property="id" column="id"/>
         <result property="username" column="username"/>
         <result property="password" column="password"/>
@@ -12,21 +12,21 @@
         id, username, password
     </sql>
 
-    <select id="findUser" resultMap="BaseResultMap" parameterType="com.song.sweetgirl.model.User">
+    <select id="findUser" resultMap="BaseResultMap" parameterType="com.song.sweet.model.User">
         SELECT
         <include refid="Base_Column_List"/>
         FROM user
         WHERE username = #{username} AND password = #{password}
     </select>
 
-    <select id="findByUserName" resultMap="BaseResultMap" parameterType="com.song.sweetgirl.model.User">
+    <select id="findByUserName" resultMap="BaseResultMap" parameterType="com.song.sweet.model.User">
         SELECT
         <include refid="Base_Column_List"/>
         FROM user
         WHERE username = #{username}
     </select>
 
-    <insert id="saveUser" parameterType="com.song.sweetgirl.model.User">
+    <insert id="saveUser" parameterType="com.song.sweet.model.User">
         INSERT INTO user (username, password)
         VALUES(#{username}, #{password})
     </insert>
