@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.Random;
 
 public class GeneratorUtils {
@@ -17,6 +18,8 @@ public class GeneratorUtils {
     public static SimpleDateFormat milliFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
     public static SimpleDateFormat zeroPointDateFormat = new SimpleDateFormat("yyyy-MM-dd 00:00:00");
     public static SimpleDateFormat midnightDateFormat = new SimpleDateFormat("yyyy-MM-dd 23:59:59");
+
+    public static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     /**
      * 获取字符串类型的随机主键ID
