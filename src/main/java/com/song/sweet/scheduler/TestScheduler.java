@@ -1,9 +1,9 @@
 package com.song.sweet.scheduler;
 
 import com.song.sweet.service.TestService;
+import com.song.sweet.service.utils.GeneratorUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -24,7 +24,7 @@ public class TestScheduler {
 
     @Scheduled(cron = "0 */1 * * * ?")
     public void timer() {
-        logger.info("Test Timer in progress! :{}", LocalDateTime.now());
+        logger.info("Test Timer in progress! :{}", GeneratorUtils.dateFormat.format(LocalDateTime.now()));
         try {
             testService.testTimer();
         } catch (Exception e) {

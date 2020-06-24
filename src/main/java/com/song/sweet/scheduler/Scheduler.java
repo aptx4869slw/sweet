@@ -1,5 +1,6 @@
 package com.song.sweet.scheduler;
 
+import com.song.sweet.service.utils.GeneratorUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.EnableScheduling;
@@ -17,7 +18,7 @@ public class Scheduler {
     @Scheduled(fixedRate = 1000 * 60 * 30)
     public void timer() {
         try {
-            logger.info("Timer in progress! :{}", LocalDateTime.now());
+            logger.info("Timer in progress! :{}", GeneratorUtils.dateFormat.format(LocalDateTime.now()));
         } catch (Exception e) {
             logger.error(e.getMessage());
         }

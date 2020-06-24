@@ -19,6 +19,8 @@ spring:
         max-idle: 8
         min-idle: 0
     timeout: 3000
+  jpa:
+    open-in-view: false
   cache:
     type: redis
   session:
@@ -61,19 +63,25 @@ pagehelper:
 
 jasypt:
   encryptor:
-    string-output-type: base64
+    stringOutputType: base64
     algorithm: PBEWithMD5AndDES
-    pool-size: 1
-    keyObtentionIterations: 1000
+    poolSize: 1
     provider-name:
     provider-class-name:
-    salt-generator-classname: org.jasypt.salt.RandomSaltGenerator
-    iv-generator-classname: org.jasypt.salt.NoOpIVGenerator
+    keyObtentionIterations: 1000
+    ivGeneratorClassname: org.jasypt.salt.NoOpIVGenerator
+    saltGeneratorClassname: org.jasypt.salt.RandomSaltGenerator
     password: a6d11ff4814488830abf582144cb5df3
 
 logging:
   level:
-    com.song.sweetgirl.dao: debug
+    com:
+      song:
+        sweet:
+          dao: debug
+#    org:
+#      springframework:
+#        web: trace
 
 gaode:
   map:
