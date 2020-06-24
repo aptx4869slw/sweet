@@ -24,12 +24,12 @@ public class JournalController {
 
     @PostMapping(path = {"/journal"})
     public ResponseEntity<JournalDTO> saveBarrage(@RequestParam String content) {
-        logger.debug("REST request to save a journal :{}", content);
+        logger.debug("REST request to save a journal : {} ", content);
         try {
             JournalDTO journalDTO = journalService.save(content);
             return ResponseEntity.created(new URI("/api/journal/" + journalDTO.getId())).body(journalDTO);
         } catch (Exception e) {
-            logger.error("REST request to save a journal :{}" + e.getMessage());
+            logger.error("REST request to save a journal : {} " + e.getMessage());
             return new ResponseEntity(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -41,7 +41,7 @@ public class JournalController {
             List<JournalDTO> results = journalService.getJournals(page);
             return ResponseEntity.status(HttpStatus.OK).body(results);
         } catch (Exception e) {
-            logger.error("REST request to get Journals :{}" + e.getMessage());
+            logger.error("REST request to get Journals : {} " + e.getMessage());
             return new ResponseEntity(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

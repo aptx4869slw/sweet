@@ -26,35 +26,35 @@ public class LoginController {
 
     @PostMapping(value = "/login")
     public ResponseEntity<String> login(HttpServletRequest request, HttpServletResponse response, @Valid User user) {
-        logger.debug("REST request to Login Into System :{}", user.toString());
+        logger.debug("REST request to Login Into System : {} ", user.toString());
         try {
             String result = userService.login(request, response, user);
             return ResponseEntity.status(HttpStatus.OK).body(result);
         } catch (Exception e) {
-            logger.error("REST request to Login Into System :{}" + e.getMessage());
+            logger.error("REST request to Login Into System : {} " + e.getMessage());
             return ResponseEntity.status(HttpStatus.OK).body("error.html");
         }
     }
 
     @PostMapping(value = "/register")
     public ResponseEntity<String> register(HttpServletRequest request, HttpServletResponse response, @Valid User user) {
-        logger.debug("REST request to register User Into System :{}", user.toString());
+        logger.debug("REST request to register User Into System : {} ", user.toString());
         try {
             String result = userService.register(request, response, user);
             return ResponseEntity.status(HttpStatus.OK).body(result);
         } catch (Exception e) {
-            logger.error("REST request to register User Into System :{}" + e.getMessage());
+            logger.error("REST request to register User Into System : {} " + e.getMessage());
             return ResponseEntity.status(HttpStatus.OK).body("error.html");
         }
     }
 
     @GetMapping(value = "/captcha")
     public void captcha(HttpServletRequest request, HttpServletResponse response) {
-        logger.debug("REST request to get captcha from System :{}", request.getPathInfo());
+        logger.debug("REST request to get captcha from System : {} ", request.getPathInfo());
         try {
             userService.captcha(request, response);
         } catch (Exception e) {
-            logger.error("REST request to get captcha from System :{}" + e.getMessage());
+            logger.error("REST request to get captcha from System : {} " + e.getMessage());
         }
     }
 

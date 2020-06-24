@@ -24,7 +24,7 @@ public class TestScheduler {
 
     @Scheduled(cron = "0 */1 * * * ?")
     public void timer() {
-        logger.info("Test Timer in progress! : {}", GeneratorUtils.formatter.format(LocalDateTime.now()));
+        logger.info("Test Timer in progress! : {} ", GeneratorUtils.formatter.format(LocalDateTime.now()));
         try {
             testService.testTimer();
         } catch (Exception e) {

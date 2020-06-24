@@ -18,7 +18,7 @@ public class Scheduler {
     @Scheduled(fixedRate = 1000 * 60 * 30)
     public void timer() {
         try {
-            logger.info("Timer in progress! : {}", GeneratorUtils.formatter.format(LocalDateTime.now()));
+            logger.info("Timer in progress! : {} ", GeneratorUtils.formatter.format(LocalDateTime.now()));
         } catch (Exception e) {
             logger.error(e.getMessage());
         }

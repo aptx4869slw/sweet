@@ -24,12 +24,12 @@ public class BarrageController {
 
     @PostMapping(path = {"/barrage"}, consumes = "application/json")
     public ResponseEntity saveBarrage(@RequestBody BarrageDTO barrageDTO) {
-        logger.debug("REST request to save a barrage :{}", barrageDTO.toString());
+        logger.debug("REST request to save a barrage : {} ", barrageDTO.toString());
         try {
             barrageDTO = barrageService.save(barrageDTO);
             return ResponseEntity.created(new URI("/api/barrage/" + barrageDTO.getId())).body(barrageDTO);
         } catch (Exception e) {
-            logger.error("REST request to save a barrage :{}" + e.getMessage());
+            logger.error("REST request to save a barrage : {} " + e.getMessage());
             return new ResponseEntity(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -41,7 +41,7 @@ public class BarrageController {
             List<BarrageDTO> result = barrageService.findBarrages(page);
             return ResponseEntity.status(HttpStatus.OK).body(result);
         } catch (Exception e) {
-            logger.error("REST request to get barrages :{}" + e.getMessage());
+            logger.error("REST request to get barrages : {} " + e.getMessage());
             return new ResponseEntity(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

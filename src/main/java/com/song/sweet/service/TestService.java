@@ -5,7 +5,9 @@ import com.github.pagehelper.PageHelper;
 import com.song.sweet.controller.vm.PageVM;
 import com.song.sweet.dao.TestDAO;
 import com.song.sweet.model.Test;
+import com.song.sweet.repository.TestRepository;
 import com.song.sweet.service.dto.TestDTO;
+import org.apache.commons.lang3.StringUtils;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.slf4j.Logger;
@@ -15,11 +17,20 @@ import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import java.math.BigDecimal;
 import java.rmi.ServerException;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
@@ -32,6 +43,9 @@ public class TestService {
 
     @Autowired
     private TestDAO testDAO;
+
+    @Autowired
+    private TestRepository testRepository;
 
     private ModelMapper mapper = new ModelMapper();
 
@@ -65,7 +79,7 @@ public class TestService {
     public TestDTO findOne(Long id) throws ServerException {
         Test test = testDAO.findOne(id);
         if (test == null) {
-            logger.debug("The test is not exist! :{}", id);
+            logger.debug("The test is not exist! : {} ", id);
             throw new ServerException("The test is not exist!");
         }
         TestDTO result = mapper.map(test, TestDTO.class);
@@ -96,6 +110,26 @@ public class TestService {
     }
 
     /**
+     * JPA查询列表
+     *
+     * @return
+     */
+    @Cacheable(value = "findAllJPA", unless = "#result eq null")
+    public List<TestDTO> findAllByJPA(PageVM page) {
+        Specification<Test> specification = this.buildSpecification(Boolean.FALSE);
+        Pageable pageable;
+        if (page != null && page.getPageNum() != null && page.getPageSize() != null) {
+            pageable = PageRequest.of(page.getPageNum(), page.getPageSize(), Sort.Direction.DESC, "local_date_time");
+        } else {
+            pageable = Pageable.unpaged();
+        }
+        List<Test> tests = testRepository.findAll(specification, pageable).getContent();
+        List<TestDTO> result = mapper.map(tests, new TypeToken<List<TestDTO>>() {
+        }.getType());
+        return result;
+    }
+
+    /**
      * 修改数据
      *
      * @param testDTO
@@ -106,7 +140,7 @@ public class TestService {
     public TestDTO update(TestDTO testDTO) throws ServerException {
         Test test = testDAO.findOne(testDTO.getId());
         if (test == null) {
-            logger.debug("The test is not exist! :{}", testDTO.getId());
+            logger.debug("The test is not exist! : {} ", testDTO.getId());
             throw new ServerException("The test is not exist!");
         }
         test = mapper.map(testDTO, Test.class);
@@ -114,7 +148,7 @@ public class TestService {
         if (count > 0) {
             return mapper.map(test, TestDTO.class);
         } else {
-            logger.debug("update failed! :{}", testDTO.getId());
+            logger.debug("update failed! : {} ", testDTO.getId());
             throw new ServerException("update failed!");
         }
     }
@@ -132,9 +166,28 @@ public class TestService {
         if (count > 0) {
             return Boolean.TRUE;
         } else {
-            logger.debug("delete failed! :{}", id);
+            logger.debug("delete failed! : {} ", id);
             throw new ServerException("delete failed!");
         }
+    }
+
+    /**
+     * 构建查询条件
+     *
+     * @param flag
+     * @return
+     */
+    private Specification<Test> buildSpecification(Boolean flag) {
+        Specification<Test> specification = (Specification<Test>) (root, query, cb) -> {
+            List<Predicate> list = new ArrayList<>();
+            Predicate[] p = new Predicate[list.size()];
+            if (StringUtils.isBlank(flag.toString())) {
+                list.add(cb.equal(root.get("string").as(String.class), ""));
+                list.add(cb.equal(root.get("integer").as(Integer.class), 0));
+            }
+            return cb.and(list.toArray(p));
+        };
+        return specification;
     }
 
     /**

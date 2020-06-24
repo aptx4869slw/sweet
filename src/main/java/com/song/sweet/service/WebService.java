@@ -31,8 +31,8 @@ public class WebService {
      */
     public void getProvinceByIP(HttpServletRequest request){
         String ipAddress = CommonUtils.getIpAddress(request);
-        logger.info("Send a request to get province data ! key: {} ip : {}", gaodeMapKey, ipAddress);
+        logger.info("Send a request to get province data ! key: {} ip : {} ", gaodeMapKey, ipAddress);
 //        JSONObject data = gaodeMapFeignClient.getProvinceByIP(gaodeMapKey, ipAddress);
-//        logger.info("Data obtained according to IP ! data: {}", JSONObject.toJSONString(data));
+//        logger.info("Data obtained according to IP ! data: {} ", JSONObject.toJSONString(data));
     }
 }

@@ -1,23 +1,34 @@
 package com.song.sweet.model;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+@Entity
+@Table(name = "test")
 public class Test implements Serializable {
 
     private static final long serialVersionUID = 1289112090832266058L;
 
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Column(name = "number")
     private Integer number;
 
+    @Column(name = "string")
     private String string;
 
+    @Column(name = "price")
     private BigDecimal price;
 
+    @Column(name = "flag")
     private Boolean flag;
 
+    @Column(name = "local_date_time")
     private LocalDateTime localDateTime;
 
     public Long getId() {
