@@ -11,18 +11,24 @@ public class GeneratorUtils {
 
     private static final Logger logger = LoggerFactory.getLogger(GeneratorUtils.class);
 
-    public static SimpleDateFormat timeRangeDateFormat = new SimpleDateFormat("HH:mm");
-    public static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-    public static SimpleDateFormat timestampFormat = new SimpleDateFormat("yyyyMMddHHmmss");
-    public static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-    public static SimpleDateFormat milliFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
-    public static SimpleDateFormat zeroPointDateFormat = new SimpleDateFormat("yyyy-MM-dd 00:00:00");
-    public static SimpleDateFormat midnightDateFormat = new SimpleDateFormat("yyyy-MM-dd 23:59:59");
+    public static SimpleDateFormat simpleDateSDF = new SimpleDateFormat("yyyy-MM-dd");
+    public static SimpleDateFormat commonDateSDF = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    public static SimpleDateFormat zeroPointSDF = new SimpleDateFormat("yyyy-MM-dd 00:00:00");
+    public static SimpleDateFormat midnightSDF = new SimpleDateFormat("yyyy-MM-dd 23:59:59");
+    public static SimpleDateFormat timestampSDF = new SimpleDateFormat("yyyyMMddHHmmss");
+    public static SimpleDateFormat milliDateSDF = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+    public static SimpleDateFormat timeRangeSDF = new SimpleDateFormat("HH:mm");
 
-    public static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    public static DateTimeFormatter simpleDateDTF = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    public static DateTimeFormatter commonDateDTF = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    public static DateTimeFormatter zeroPointDTF = DateTimeFormatter.ofPattern("yyyy-MM-dd 00:00:00");
+    public static DateTimeFormatter midnightDTF = DateTimeFormatter.ofPattern("yyyy-MM-dd 23:59:59");
+    public static DateTimeFormatter timestampDTF = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
+    public static DateTimeFormatter milliDateDTF = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS");
 
     /**
      * 获取字符串类型的随机主键ID
+     *
      * @return
      */
     public static String getStringID() {
