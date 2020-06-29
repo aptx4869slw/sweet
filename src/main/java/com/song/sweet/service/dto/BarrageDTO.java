@@ -1,17 +1,19 @@
 package com.song.sweet.service.dto;
 
+import io.swagger.annotations.ApiModel;
 import org.jsoup.Jsoup;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
+@ApiModel
 public class BarrageDTO implements Serializable {
 
     private static final long serialVersionUID = -6859676527582695869L;
 
     private Long id;
 
-    private LocalDateTime createdDate;
+    private LocalDateTime createdDate = LocalDateTime.now();
 
     private String img;
 

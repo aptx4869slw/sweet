@@ -3,6 +3,8 @@ package com.song.sweet.controller;
 import com.song.sweet.controller.vm.PageVM;
 import com.song.sweet.service.JournalService;
 import com.song.sweet.service.dto.JournalDTO;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.util.List;
 
+@Api(tags = "更新日志管理")
 @RestController
 @RequestMapping("/api")
 public class JournalController {
@@ -22,6 +25,7 @@ public class JournalController {
     @Autowired
     private JournalService journalService;
 
+    @ApiOperation(value = "保存博客更新日志记录")
     @PostMapping(path = {"/journal"})
     public ResponseEntity<JournalDTO> saveBarrage(@RequestParam String content) {
         logger.debug("REST request to save a journal : {} ", content);
@@ -34,6 +38,7 @@ public class JournalController {
         }
     }
 
+    @ApiOperation(value = "查询博客更新日志记录")
     @GetMapping("/journals")
     public ResponseEntity<List<JournalDTO>> getJournals(PageVM page) {
         logger.debug("REST request to get Journals");

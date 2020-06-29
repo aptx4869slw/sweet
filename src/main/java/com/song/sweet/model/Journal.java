@@ -1,18 +1,27 @@
 package com.song.sweet.model;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
+@Entity
+@Table(name = "journal")
 public class Journal implements Serializable {
 
     private static final long serialVersionUID = -475125670729446291L;
 
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Column(name = "created_date")
     private LocalDateTime createdDate;
 
+    @Column(name = "content_date")
     private String contentDate;
 
+    @Column(name = "content")
     private String content;
 
     public Long getId() {

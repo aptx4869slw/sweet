@@ -1,28 +1,44 @@
 package com.song.sweet.model;
 
+import io.swagger.annotations.ApiModel;
+
+import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
+@Entity
+@Table(name = "barrage")
 public class Barrage implements Serializable {
 
     private static final long serialVersionUID = -1099189125315055134L;
 
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Column(name = "created_date")
     private LocalDateTime createdDate;
 
+    @Column(name = "img")
     private String img;
 
+    @Column(name = "info")
     private String info;
 
+    @Column(name = "href")
     private String href;
 
+    @Column(name = "close")
     private boolean close;
 
+    @Column(name = "speed")
     private int speed;
 
+    @Column(name = "color")
     private String color;
 
+    @Column(name = "old_ie_color")
     private String old_ie_color;
 
     public Long getId() {

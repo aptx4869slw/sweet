@@ -3,6 +3,8 @@ package com.song.sweet.controller;
 import com.song.sweet.controller.vm.PageVM;
 import com.song.sweet.service.BarrageService;
 import com.song.sweet.service.dto.BarrageDTO;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.util.List;
 
+@Api(tags = "弹幕页面管理")
 @RestController
 @RequestMapping("/api")
 public class BarrageController {
@@ -22,6 +25,7 @@ public class BarrageController {
     @Autowired
     private BarrageService barrageService;
 
+    @ApiOperation(value = "保存发送的弹幕")
     @PostMapping(path = {"/barrage"}, consumes = "application/json")
     public ResponseEntity saveBarrage(@RequestBody BarrageDTO barrageDTO) {
         logger.debug("REST request to save a barrage : {} ", barrageDTO.toString());
@@ -34,6 +38,7 @@ public class BarrageController {
         }
     }
 
+    @ApiOperation(value = "查询弹幕列表")
     @GetMapping("/barrages")
     public ResponseEntity<List<BarrageDTO>> getBarrages(PageVM page) {
         logger.debug("REST request to get barrages");

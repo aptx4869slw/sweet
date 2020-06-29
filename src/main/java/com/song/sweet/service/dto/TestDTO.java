@@ -1,12 +1,14 @@
 package com.song.sweet.service.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import io.swagger.annotations.ApiModel;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
+@ApiModel
 public class TestDTO implements Serializable {
 
     private static final long serialVersionUID = -6267488977559750093L;
@@ -22,7 +24,7 @@ public class TestDTO implements Serializable {
     private Boolean flag;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime localDateTime;
+    private LocalDateTime localDateTime = LocalDateTime.now();
 
     private List<String> list;
 

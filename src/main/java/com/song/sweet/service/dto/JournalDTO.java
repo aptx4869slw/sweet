@@ -1,15 +1,18 @@
 package com.song.sweet.service.dto;
 
+import io.swagger.annotations.ApiModel;
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
+@ApiModel
 public class JournalDTO implements Serializable {
 
     private static final long serialVersionUID = 7668139997842303573L;
 
     private Long id;
 
-    private LocalDateTime createdDate;
+    private LocalDateTime createdDate = LocalDateTime.now();
 
     private String contentDate;
 

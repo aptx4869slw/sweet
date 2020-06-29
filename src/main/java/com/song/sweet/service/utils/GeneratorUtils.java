@@ -11,6 +11,7 @@ public class GeneratorUtils {
 
     private static final Logger logger = LoggerFactory.getLogger(GeneratorUtils.class);
 
+    // Date时间简单格式化
     public static SimpleDateFormat simpleDateSDF = new SimpleDateFormat("yyyy-MM-dd");
     public static SimpleDateFormat commonDateSDF = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     public static SimpleDateFormat zeroPointSDF = new SimpleDateFormat("yyyy-MM-dd 00:00:00");
@@ -19,6 +20,7 @@ public class GeneratorUtils {
     public static SimpleDateFormat milliDateSDF = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
     public static SimpleDateFormat timeRangeSDF = new SimpleDateFormat("HH:mm");
 
+    // LocalDateTime时间简单格式化
     public static DateTimeFormatter simpleDateDTF = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     public static DateTimeFormatter commonDateDTF = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
     public static DateTimeFormatter zeroPointDTF = DateTimeFormatter.ofPattern("yyyy-MM-dd 00:00:00");

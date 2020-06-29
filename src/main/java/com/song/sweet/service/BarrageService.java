@@ -14,12 +14,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.rmi.ServerException;
 import java.util.Comparator;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 @Service
 @Transactional
@@ -33,6 +35,9 @@ public class BarrageService {
     @Autowired
     private BarrageDAO barrageDAO;
 
+    @Autowired
+    private RedisTemplate redisTemplate;
+
     /**
      * 保存弹幕
      *
@@ -45,6 +50,10 @@ public class BarrageService {
         Barrage barrage = mapper.map(barrageDTO, Barrage.class);
         Integer count = barrageDAO.save(barrage);
         if (count > 0) {
+            Page<Barrage> pageResult = barrageDAO.findAll();
+            List<BarrageDTO> result = mapper.map(pageResult, new TypeToken<List<BarrageDTO>>() {
+            }.getType());
+            redisTemplate.opsForValue().set("Barrages", result, 1, TimeUnit.SECONDS);
             return mapper.map(barrage, BarrageDTO.class);
         } else {
             logger.debug("Barrage save failed!", barrage);
@@ -57,7 +66,7 @@ public class BarrageService {
      *
      * @return
      */
-    @Cacheable(value = "Barrages", unless = "#result eq null")
+    @Cacheable(value = "Barrages", key = "'Barrages'", unless = "#result eq null")
     public List<BarrageDTO> findBarrages(PageVM page) {
         Page<Barrage> pageResult;
         if (page.getPageNum() == null || page.getPageSize() == null) {

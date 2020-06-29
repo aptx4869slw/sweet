@@ -17,12 +17,6 @@ public class WebService {
     @Value("${gaode.map.api.key}")
     private String gaodeMapKey;
 
-    /*private final GaodeMapFeignClient gaodeMapFeignClient;
-
-    public WebService(GaodeMapFeignClient gaodeMapFeignClient) {
-        this.gaodeMapFeignClient = gaodeMapFeignClient;
-    }*/
-
     /**
      * 保存方法
      *

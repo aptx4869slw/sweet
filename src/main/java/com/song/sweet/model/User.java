@@ -1,17 +1,26 @@
 package com.song.sweet.model;
 
+import javax.persistence.*;
 import java.io.Serializable;
 
+@Entity
+@Table(name = "user")
 public class User implements Serializable {
 
     private static final long serialVersionUID = -313168953581601338L;
 
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Column(name = "username")
     private String username;
 
+    @Column(name = "password")
     private String password;
 
+    @Column(name = "con_password")
     private String conPassword;
 
     public Long getId() {

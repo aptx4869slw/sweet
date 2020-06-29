@@ -4,6 +4,8 @@ import com.song.sweet.controller.vm.PageVM;
 import com.song.sweet.service.TestService;
 import com.song.sweet.service.dto.TestDTO;
 import com.song.sweet.service.utils.ImageUtils;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.jasypt.encryption.StringEncryptor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.net.URI;
 import java.util.List;
 
+@Api(tags = "测试API接口管理")
 @RestController
 @RequestMapping("/api")
 public class TestController {
@@ -31,6 +34,7 @@ public class TestController {
     @Autowired
     private StringEncryptor encryptor;
 
+    @ApiOperation(value = "创建测试数据")
     @PostMapping(path = {"/test"})
     public ResponseEntity<TestDTO> save(@RequestBody TestDTO testDTO) {
         logger.debug("REST request to save Test : {} ", testDTO.toString());
@@ -43,6 +47,7 @@ public class TestController {
         }
     }
 
+    @ApiOperation(value = "根据ID查找测试数据")
     @GetMapping(path = {"/test/{id}"})
     public ResponseEntity<TestDTO> findOne(@PathVariable Long id) {
         logger.debug("REST request to get a test : {} ", id);
@@ -55,6 +60,7 @@ public class TestController {
         }
     }
 
+    @ApiOperation(value = "查找所有测试数据", notes = "Mybatis查询")
     @GetMapping(path = {"/test"})
     public ResponseEntity<List<TestDTO>> findAll(PageVM page) {
         logger.debug("REST request to get all tests");
@@ -67,6 +73,7 @@ public class TestController {
         }
     }
 
+    @ApiOperation(value = "查找所有测试数据", notes = "JPA查询")
     @GetMapping(path = {"/tests"})
     public ResponseEntity<List<TestDTO>> findAllByJPA(PageVM page) {
         logger.debug("REST request to get all tests by jpa");
@@ -80,6 +87,7 @@ public class TestController {
         }
     }
 
+    @ApiOperation(value = "修改测试数据")
     @PutMapping(path = {"/test"})
     public ResponseEntity<TestDTO> update(@RequestBody TestDTO testDTO) {
         logger.debug("REST request to update Test : {} ", testDTO.toString());
@@ -92,6 +100,7 @@ public class TestController {
         }
     }
 
+    @ApiOperation(value = "删除测试数据")
     @DeleteMapping(path = {"/test/{id}"})
     public ResponseEntity<Boolean> delete(@PathVariable Long id) {
         logger.debug("REST request to delete Test : {} ", id);
@@ -104,6 +113,7 @@ public class TestController {
         }
     }
 
+    @ApiOperation(value = "上传图片数据", notes = "上传至阿里云OSS服务")
     @PostMapping("/image_upload")
     public ResponseEntity<String> uploadImage(@RequestParam("file") MultipartFile file) {
         try {
@@ -121,6 +131,7 @@ public class TestController {
      *
      * @param pass 需加密文本
      */
+    @ApiOperation(value = "测试配置文件加密算法", notes = "将数据库账号密码进行加密保存")
     @GetMapping(path = {"/encrypt"})
     public void testEncrypt(String pass) {
         String encryptPass = encryptor.encrypt(pass);
