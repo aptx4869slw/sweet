@@ -86,4 +86,4 @@ logging:
 gaode:
   map:
     api.key: 55a2c0fbef6fc7e5f5d9c40cf14536d1
-    api.url: https://restapi.amap.com
+    api.url: https://restapi.amap.com/v3/ip

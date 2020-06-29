@@ -2,6 +2,8 @@ package com.song.sweet.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "user")
@@ -11,7 +13,7 @@ public class User implements Serializable {
 
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "username")
@@ -22,6 +24,9 @@ public class User implements Serializable {
 
     @Column(name = "con_password")
     private String conPassword;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    private Set<LandTrack> landTracks = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -55,6 +60,14 @@ public class User implements Serializable {
         this.conPassword = conPassword;
     }
 
+    public Set<LandTrack> getLandTracks() {
+        return landTracks;
+    }
+
+    public void setLandTracks(Set<LandTrack> landTracks) {
+        this.landTracks = landTracks;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -62,7 +75,7 @@ public class User implements Serializable {
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", conPassword='" + conPassword + '\'' +
+                ", landTracks=" + landTracks +
                 '}';
     }
-
 }
