@@ -53,7 +53,8 @@ public class BarrageService {
             Page<Barrage> pageResult = barrageDAO.findAll();
             List<BarrageDTO> result = mapper.map(pageResult, new TypeToken<List<BarrageDTO>>() {
             }.getType());
-            redisTemplate.opsForValue().set("Barrages", result, 1, TimeUnit.SECONDS);
+            List<BarrageDTO> br = (List<BarrageDTO>) redisTemplate.opsForValue().get("Barrages");
+            redisTemplate.opsForValue().set("Barrages::Barrages", result, 1, TimeUnit.SECONDS);
             return mapper.map(barrage, BarrageDTO.class);
         } else {
             logger.debug("Barrage save failed!", barrage);

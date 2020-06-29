@@ -33,6 +33,7 @@ public class SwaggerConfig {
         return new ApiInfoBuilder()
                 .title("哩問说")
                 .version(VERSION)
+                .contact("Liwen's")
                 .description("哩問说 博客中所用到的所有API接口的详细文档。")
                 .termsOfServiceUrl("http://www.liwen.cloud")
                 .build();
