@@ -1,6 +1,10 @@
 package com.song.sweet.model;
 
-public class GaodeMapData {
+import java.io.Serializable;
+
+public class GaodeMapData implements Serializable {
+
+    private static final long serialVersionUID = 6632400737488849155L;
 
     private String status;
 

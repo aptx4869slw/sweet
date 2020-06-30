@@ -87,3 +87,8 @@ gaode:
   map:
     api.key: 55a2c0fbef6fc7e5f5d9c40cf14536d1
     api.url: https://restapi.amap.com/v3/ip
+
+chinaz:
+  api:
+    key: d8a0c7ef0f124724ac8c34381a6af116
+    url: http://apidata.chinaz.com/CallAPI/Ip

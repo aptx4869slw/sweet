@@ -1,5 +1,7 @@
 package com.song.sweet.service.utils;
 
+import eu.bitwalker.useragentutils.Browser;
+import eu.bitwalker.useragentutils.OperatingSystem;
 import eu.bitwalker.useragentutils.UserAgent;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -39,7 +41,8 @@ public class CommonUtils {
     // 获取用户软件信息
     public static UserAgent getUserAgent(HttpServletRequest request) {
         String agentHeader = request.getHeader("User-Agent");
-        return UserAgent.parseUserAgentString(agentHeader);
+        UserAgent userAgent = UserAgent.parseUserAgentString(agentHeader);
+        return userAgent == null ? new UserAgent(OperatingSystem.UNKNOWN, Browser.UNKNOWN) : userAgent;
     }
 
     // 获取请求的IP地址

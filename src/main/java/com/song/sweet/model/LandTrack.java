@@ -21,17 +21,29 @@ public class LandTrack implements Serializable {
     @Column(name = "ip")
     private String ip;
 
+    @Column(name = "country")
+    private String country;
+
     @Column(name = "province")
     private String province;
 
     @Column(name = "city")
     private String city;
 
+    @Column(name = "isp")
+    private String isp;
+
     @Column(name = "system")
     private String system;
 
     @Column(name = "browser")
     private String browser;
+
+    @Column(name = "visits")
+    private Integer visits = 1;
+
+    @Column(name = "last_visit_date")
+    private LocalDateTime lastVisitDate = LocalDateTime.now();
 
     @Column(name = "rectangle")
     private String rectangle;
@@ -64,6 +76,14 @@ public class LandTrack implements Serializable {
         this.ip = ip;
     }
 
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
     public String getProvince() {
         return province;
     }
@@ -80,6 +100,14 @@ public class LandTrack implements Serializable {
         this.city = city;
     }
 
+    public String getIsp() {
+        return isp;
+    }
+
+    public void setIsp(String isp) {
+        this.isp = isp;
+    }
+
     public String getSystem() {
         return system;
     }
@@ -94,6 +122,22 @@ public class LandTrack implements Serializable {
 
     public void setBrowser(String browser) {
         this.browser = browser;
+    }
+
+    public Integer getVisits() {
+        return visits;
+    }
+
+    public void setVisits(Integer visits) {
+        this.visits = visits;
+    }
+
+    public LocalDateTime getLastVisitDate() {
+        return lastVisitDate;
+    }
+
+    public void setLastVisitDate(LocalDateTime lastVisitDate) {
+        this.lastVisitDate = lastVisitDate;
     }
 
     public String getRectangle() {

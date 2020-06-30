@@ -10,4 +10,6 @@ public interface LandTrackRepository extends JpaRepository<LandTrack, String>, J
 
     LandTrack findAllByUser_Id(Integer userId);
 
+    LandTrack findFirstByIpAndSystemAndBrowser(String ip, String system, String browser);
+
 }
