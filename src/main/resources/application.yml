@@ -1,14 +1,14 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url : jdbc:mysql://127.0.0.1:3306/sweet?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
-    username : ENC(7Y1ASPSRVRnIsluHgSMFrw==)
-    password : ENC(zr1CAapZa43EhtHzHY03pQ==)
-#    password : ENC(51uMJKgSnH+mihXyFLSM+vRrz+pJptXJ)
+    url : jdbc:mysql://localhost:3306/sweet?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    username : root
+    password : 123456
+    # password : ENC(51uMJKgSnH+mihXyFLSM+vRrz+pJptXJ)
     generate-unique-name: false
     cache-prep-stmts: true
   redis:
-    host: 127.0.0.1
+    host: localhost
     port: 6379
     password: 123456
     database: 0
@@ -61,17 +61,17 @@ pagehelper:
   support-methods-arguments: true
   params: count=countSql
 
-jasypt:
-  encryptor:
-    stringOutputType: base64
-    algorithm: PBEWithMD5AndDES
-    poolSize: 1
-    provider-name:
-    provider-class-name:
-    keyObtentionIterations: 1000
-    ivGeneratorClassname: org.jasypt.salt.NoOpIVGenerator
-    saltGeneratorClassname: org.jasypt.salt.RandomSaltGenerator
-    password: a6d11ff4814488830abf582144cb5df3
+#jasypt:
+#  encryptor:
+#    stringOutputType: base64
+#    algorithm: PBEWithMD5AndDES
+#    poolSize: 1
+#    provider-name:
+#    provider-class-name:
+#    keyObtentionIterations: 1000
+#    ivGeneratorClassname: org.jasypt.salt.NoOpIVGenerator
+#    saltGeneratorClassname: org.jasypt.salt.RandomSaltGenerator
+#    password: a6d11ff4814488830abf582144cb5df3
 
 logging:
   level:

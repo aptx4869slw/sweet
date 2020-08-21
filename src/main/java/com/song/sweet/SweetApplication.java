@@ -1,6 +1,5 @@
 package com.song.sweet;
 
-import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -11,9 +10,9 @@ import java.util.TimeZone;
 
 //@ServletComponentScan
 //@EnableFeignClients
+//@EnableEncryptableProperties()
 @EnableCaching
 @SpringBootApplication
-@EnableEncryptableProperties()
 @MapperScan("com.song.sweet.dao")
 public class SweetApplication {
 
