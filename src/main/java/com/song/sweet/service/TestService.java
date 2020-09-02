@@ -3,7 +3,7 @@ package com.song.sweet.service;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.song.sweet.controller.vm.PageVM;
-import com.song.sweet.dao.TestDAO;
+import com.song.sweet.mapper.TestMapper;
 import com.song.sweet.model.Test;
 import com.song.sweet.repository.TestRepository;
 import com.song.sweet.service.dto.TestDTO;
@@ -24,10 +24,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
 import java.math.BigDecimal;
 import java.rmi.ServerException;
 import java.util.ArrayList;
@@ -42,7 +39,7 @@ public class TestService {
     private final Logger logger = LoggerFactory.getLogger(TestService.class);
 
     @Autowired
-    private TestDAO testDAO;
+    private TestMapper testMapper;
 
     @Autowired
     private TestRepository testRepository;
@@ -59,7 +56,7 @@ public class TestService {
     @CachePut(value = "save", key = "#result.id", unless = "#result eq null")
     public TestDTO save(TestDTO testDTO) throws ServerException {
         Test test = mapper.map(testDTO, Test.class);
-        Integer count = testDAO.save(test);
+        Integer count = testMapper.save(test);
         if (count > 0) {
             return mapper.map(test, TestDTO.class);
         } else {
@@ -77,7 +74,7 @@ public class TestService {
      */
     @Cacheable(value = "findOne", key = "#p0", unless = "#result eq null")
     public TestDTO findOne(Long id) throws ServerException {
-        Test test = testDAO.findOne(id);
+        Test test = testMapper.findOne(id);
         if (test == null) {
             logger.debug("The test is not exist! : {} ", id);
             throw new ServerException("The test is not exist!");
@@ -98,10 +95,10 @@ public class TestService {
     public List<TestDTO> findAll(PageVM page) {
         Page<Test> pageResult;
         if (page.getPageNum() == null || page.getPageSize() == null) {
-            pageResult = testDAO.findAll();
+            pageResult = testMapper.findAll();
         } else {
             PageHelper.startPage(page.getPageNum(), page.getPageSize());
-            pageResult = testDAO.findAllByPage();
+            pageResult = testMapper.findAllByPage();
         }
         List<TestDTO> result = mapper.map(pageResult, new TypeToken<List<TestDTO>>() {
         }.getType());
@@ -138,13 +135,13 @@ public class TestService {
      */
     @CachePut(value = "update", key = "#result.id", unless = "#result eq null")
     public TestDTO update(TestDTO testDTO) throws ServerException {
-        Test test = testDAO.findOne(testDTO.getId());
+        Test test = testMapper.findOne(testDTO.getId());
         if (test == null) {
             logger.debug("The test is not exist! : {} ", testDTO.getId());
             throw new ServerException("The test is not exist!");
         }
         test = mapper.map(testDTO, Test.class);
-        Integer count = testDAO.update(test);
+        Integer count = testMapper.update(test);
         if (count > 0) {
             return mapper.map(test, TestDTO.class);
         } else {
@@ -162,7 +159,7 @@ public class TestService {
      */
     @CacheEvict(value = "delete", key = "#id", allEntries = true)
     public Boolean delete(Long id) throws ServerException {
-        Integer count = testDAO.delete(id);
+        Integer count = testMapper.delete(id);
         if (count > 0) {
             return Boolean.TRUE;
         } else {
@@ -196,10 +193,10 @@ public class TestService {
     @Transactional
     public void testTimer() {
         final Integer total = 100;
-        Integer count = testDAO.countTests();
+        Integer count = testMapper.countTests();
         if (count > total) {
-            Test test = testDAO.findFirstTest();
-            Integer num = testDAO.delete(test.getId());
+            Test test = testMapper.findFirstTest();
+            Integer num = testMapper.delete(test.getId());
             if (num > 0) {
                 logger.info(test.toString());
             }

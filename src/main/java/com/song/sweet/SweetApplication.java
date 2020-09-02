@@ -14,7 +14,7 @@ import java.util.TimeZone;
 @EnableCaching
 @SpringBootApplication
 @EnableEncryptableProperties()
-@MapperScan("com.song.sweet.dao")
+@MapperScan("com.song.sweet.mapper")
 public class SweetApplication {
 
     public static void main(String[] args) {

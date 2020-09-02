@@ -2,6 +2,7 @@ package com.song.sweet.core;
 
 import com.song.sweet.service.utils.CommonUtils;
 import eu.bitwalker.useragentutils.UserAgent;
+import eu.bitwalker.useragentutils.Version;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,15 +29,19 @@ public class ApiFilter implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
+        String version = "1.0.0";
         String method = request.getMethod();
         UserAgent userAgent = CommonUtils.getUserAgent(request);
+        if (userAgent.getBrowserVersion() != null){
+            version = userAgent.getBrowserVersion().getMajorVersion();
+        }
         logger.info("Http Request Info : {" +
                 "\"Method\":\"" + method +
                 "\",\"URL\":\"" + CommonUtils.getRequestURI(request) +
                 "\",\"IpAddress\":\"" + CommonUtils.getIpAddress(request) +
                 "\",\"Content-Type\":\"" + CommonUtils.getContentType(request) +
                 "\",\"User-System\":\"" + userAgent.getOperatingSystem() +
-                "\",\"User-Browser\":\"" + userAgent.getBrowser() + userAgent.getBrowserVersion().getMajorVersion() +
+                "\",\"User-Browser\":\"" + userAgent.getBrowser() + version +
                 "\"}");
         if (StringUtils.isNotBlank(method) && method.equalsIgnoreCase("options")) {
             response.setHeader("X-Frame-Options", "SAMEORIGIN");

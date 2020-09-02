@@ -3,7 +3,7 @@ package com.song.sweet.service;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.song.sweet.controller.vm.PageVM;
-import com.song.sweet.dao.BarrageDAO;
+import com.song.sweet.mapper.BarrageMapper;
 import com.song.sweet.model.Barrage;
 import com.song.sweet.service.dto.BarrageDTO;
 import org.modelmapper.ModelMapper;
@@ -33,7 +33,7 @@ public class BarrageService {
     private ModelMapper mapper = new ModelMapper();
 
     @Autowired
-    private BarrageDAO barrageDAO;
+    private BarrageMapper barrageMapper;
 
     @Autowired
     private RedisTemplate redisTemplate;
@@ -48,9 +48,9 @@ public class BarrageService {
     @CachePut(value = "save", key = "#result.id", unless = "#result eq null")
     public BarrageDTO save(BarrageDTO barrageDTO) throws ServerException {
         Barrage barrage = mapper.map(barrageDTO, Barrage.class);
-        Integer count = barrageDAO.save(barrage);
+        Integer count = barrageMapper.save(barrage);
         if (count > 0) {
-            Page<Barrage> pageResult = barrageDAO.findAll();
+            Page<Barrage> pageResult = barrageMapper.findAll();
             List<BarrageDTO> result = mapper.map(pageResult, new TypeToken<List<BarrageDTO>>() {
             }.getType());
             List<BarrageDTO> br = (List<BarrageDTO>) redisTemplate.opsForValue().get("Barrages");
@@ -71,10 +71,10 @@ public class BarrageService {
     public List<BarrageDTO> findBarrages(PageVM page) {
         Page<Barrage> pageResult;
         if (page.getPageNum() == null || page.getPageSize() == null) {
-            pageResult = barrageDAO.findAll();
+            pageResult = barrageMapper.findAll();
         } else {
             PageHelper.startPage(page.getPageNum(), page.getPageSize());
-            pageResult = barrageDAO.findAllByPage();
+            pageResult = barrageMapper.findAllByPage();
         }
         List<BarrageDTO> result = mapper.map(pageResult, new TypeToken<List<BarrageDTO>>() {
         }.getType());

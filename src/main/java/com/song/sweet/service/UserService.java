@@ -1,6 +1,6 @@
 package com.song.sweet.service;
 
-import com.song.sweet.dao.UserDAO;
+import com.song.sweet.mapper.UserMapper;
 import com.song.sweet.model.User;
 import com.song.sweet.model.enumeration.UserStatus;
 import com.song.sweet.service.utils.VerifyCodeUtils;
@@ -26,7 +26,7 @@ public class UserService {
     private final Logger logger = LoggerFactory.getLogger(TestService.class);
 
     @Autowired
-    private UserDAO userDAO;
+    private UserMapper userMapper;
 
     private final String BLOG_MAIN_PAGE = "blog";
 
@@ -37,7 +37,7 @@ public class UserService {
      * @return
      */
     public String login(HttpServletRequest request, HttpServletResponse response, User user) throws Exception {
-        User result = userDAO.findUser(user);
+        User result = userMapper.findUser(user);
         if (result != null) {
             if (result.getUsername().equals(user.getUsername()) && result.getPassword().equals(user.getPassword())) {
                 logger.info(result.getUsername() + UserStatus.LOGIN_SUCCESS.description());
@@ -54,11 +54,11 @@ public class UserService {
      * @return
      */
     public String register(HttpServletRequest request, HttpServletResponse response, User user) throws Exception {
-        User result = userDAO.findByUserName(user);
+        User result = userMapper.findByUserName(user);
         if (result != null) {
             return UserStatus.USER_EXIST.description();
         } else {
-            Integer num = userDAO.saveUser(user);
+            Integer num = userMapper.saveUser(user);
             if (num > 0) {
                 return UserStatus.USER_REGISTER_SUCCESS.description();
             }

@@ -3,7 +3,7 @@ package com.song.sweet.service;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.song.sweet.controller.vm.PageVM;
-import com.song.sweet.dao.JournalDAO;
+import com.song.sweet.mapper.JournalMapper;
 import com.song.sweet.model.Journal;
 import com.song.sweet.service.dto.JournalDTO;
 import org.modelmapper.ModelMapper;
@@ -35,7 +35,7 @@ public class JournalService {
     private ModelMapper mapper = new ModelMapper();
 
     @Autowired
-    private JournalDAO journalDAO;
+    private JournalMapper journalMapper;
 
     /**
      * 保存日志
@@ -52,7 +52,7 @@ public class JournalService {
         String month = new SimpleDateFormat("MMM", Locale.ENGLISH).format(new Date());
         String date = journal.getCreatedDate().getYear() + " " + month + ". " + journal.getCreatedDate().getDayOfMonth();
         journal.setContentDate(date);
-        Integer count = journalDAO.save(journal);
+        Integer count = journalMapper.save(journal);
         if (count > 0) {
             return mapper.map(journal, JournalDTO.class);
         } else {
@@ -70,10 +70,10 @@ public class JournalService {
     public List<JournalDTO> getJournals(PageVM page) {
         Page<Journal> pageResult;
         if (page.getPageNum() == null || page.getPageSize() == null) {
-            pageResult = journalDAO.findAll();
+            pageResult = journalMapper.findAll();
         } else {
             PageHelper.startPage(page.getPageNum(), page.getPageSize());
-            pageResult = journalDAO.findAllByPage();
+            pageResult = journalMapper.findAllByPage();
         }
         List<JournalDTO> result = mapper.map(pageResult, new TypeToken<List<JournalDTO>>() {
         }.getType());

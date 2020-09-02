@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.song.sweet.dao.BarrageDAO">
+<mapper namespace="com.song.sweet.mapper.BarrageMapper">
     <resultMap id="BaseResultMap" type="com.song.sweet.model.Barrage">
         <result property="id" column="id" jdbcType="BIGINT"/>
         <result property="createdDate" column="created_date" jdbcType="TIMESTAMP"/>

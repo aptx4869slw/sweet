@@ -1,11 +1,10 @@
-package com.song.sweet.dao;
+package com.song.sweet.mapper;
 
 import com.github.pagehelper.Page;
 import com.song.sweet.model.Barrage;
 import org.springframework.stereotype.Repository;
 
-@Repository
-public interface BarrageDAO {
+public interface BarrageMapper {
 
     Integer save(Barrage barrage);
 

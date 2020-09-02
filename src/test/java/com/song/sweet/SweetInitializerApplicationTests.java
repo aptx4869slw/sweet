@@ -1,7 +1,7 @@
 package com.song.sweet;
 
 import com.song.sweet.controller.vm.PageVM;
-import com.song.sweet.dao.TestDAO;
+import com.song.sweet.mapper.TestMapper;
 import com.song.sweet.service.TestService;
 import com.song.sweet.service.dto.TestDTO;
 import org.junit.Test;
@@ -25,7 +25,7 @@ public class SweetInitializerApplicationTests {
     TestService testService;
 
     @Autowired
-    TestDAO testDAO;
+    TestMapper testMapper;
 
     private final static Boolean boo = Boolean.TRUE;
 
@@ -63,7 +63,7 @@ public class SweetInitializerApplicationTests {
     @Test
     @Transactional
     public void findOne() throws Exception {
-        com.song.sweet.model.Test test = testDAO.findFirstTest();
+        com.song.sweet.model.Test test = testMapper.findFirstTest();
         assertThat(test.getId()).isEqualTo(test.getId());
     }
 
@@ -77,7 +77,7 @@ public class SweetInitializerApplicationTests {
     @Test
     @Transactional
     public void delete() throws Exception {
-        com.song.sweet.model.Test test = testDAO.findFirstTest();
+        com.song.sweet.model.Test test = testMapper.findFirstTest();
         Boolean flag = testService.delete(test.getId());
         assertThat(flag).isTrue();
     }
@@ -86,7 +86,7 @@ public class SweetInitializerApplicationTests {
     @Transactional
     public void update() throws Exception {
         TestDTO testDTO = createTestDTO();
-        com.song.sweet.model.Test test = testDAO.findFirstTest();
+        com.song.sweet.model.Test test = testMapper.findFirstTest();
         testDTO.setId(test.getId());
         testDTO = testService.update(testDTO);
         assertThat(testDTO.getFlag()).isEqualTo(boo);

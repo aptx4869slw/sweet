@@ -1,10 +1,9 @@
-package com.song.sweet.dao;
+package com.song.sweet.mapper;
 
 import com.song.sweet.model.User;
 import org.springframework.stereotype.Repository;
 
-@Repository
-public interface UserDAO {
+public interface UserMapper {
 
     Integer saveUser(User user);
 
