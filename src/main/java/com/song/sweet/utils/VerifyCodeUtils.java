@@ -1,4 +1,4 @@
-package com.song.sweet.service.utils;
+package com.song.sweet.utils;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;

@@ -1,4 +1,4 @@
-package com.song.sweet.service.utils;
+package com.song.sweet.utils;
 
 import com.aliyun.oss.OSSClient;
 import com.aliyun.oss.model.ObjectMetadata;

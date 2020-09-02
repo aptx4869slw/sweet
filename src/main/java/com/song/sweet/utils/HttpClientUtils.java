@@ -1,4 +1,4 @@
-package com.song.sweet.service.utils;
+package com.song.sweet.utils;
 
 import com.alibaba.fastjson.JSONObject;
 import org.apache.commons.httpclient.*;

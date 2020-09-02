@@ -3,7 +3,9 @@ package com.song.sweet.service;
 import com.song.sweet.mapper.UserMapper;
 import com.song.sweet.model.User;
 import com.song.sweet.model.enumeration.UserStatus;
-import com.song.sweet.service.utils.VerifyCodeUtils;
+import com.song.sweet.utils.GeneratorUtils;
+import com.song.sweet.utils.PasswordHash;
+import com.song.sweet.utils.VerifyCodeUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.awt.image.RenderedImage;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.Map;
 
 @Service
@@ -30,34 +33,42 @@ public class UserService {
 
     private final String BLOG_MAIN_PAGE = "blog";
 
-    /**
-     * 登陆
-     *
-     * @param user
+    /*
+     * @Title 登陆
+     * @Description //登陆
+     * @Author liwen
+     * @Date 2019/5/16 15:48
+     * @Param
      * @return
-     */
+     **/
     public String login(HttpServletRequest request, HttpServletResponse response, User user) throws Exception {
-        User result = userMapper.findUser(user);
+        User result = userMapper.findByUserName(user);
         if (result != null) {
-            if (result.getUsername().equals(user.getUsername()) && result.getPassword().equals(user.getPassword())) {
-                logger.info(result.getUsername() + UserStatus.LOGIN_SUCCESS.description());
+            String password = result.getPassword();
+            Boolean check = PasswordHash.validatePassword(user.getPassword(), password);
+            if (check) {
+                logger.info(result.getUsername() + UserStatus.LOGIN_SUCCESS.description() + LocalDateTime.now().format(GeneratorUtils.COMMON_DATE_DTF));
                 return BLOG_MAIN_PAGE;
             }
         }
         return UserStatus.LOGIN_FAILED.description();
     }
 
-    /**
-     * 注册
-     *
-     * @param user
+    /*
+     * @Title 注册
+     * @Description //注册
+     * @Author liwen
+     * @Date 2019/5/16 15:48
+     * @Param
      * @return
-     */
+     **/
     public String register(HttpServletRequest request, HttpServletResponse response, User user) throws Exception {
         User result = userMapper.findByUserName(user);
         if (result != null) {
             return UserStatus.USER_EXIST.description();
         } else {
+            String encryptionPwd = PasswordHash.createHash(user.getPassword());
+            user.setPassword(encryptionPwd);
             Integer num = userMapper.saveUser(user);
             if (num > 0) {
                 return UserStatus.USER_REGISTER_SUCCESS.description();
@@ -66,13 +77,14 @@ public class UserService {
         }
     }
 
-    /**
-     * 验证码
-     *
-     * @param request
-     * @param response
+    /*
+     * @Title 验证码
+     * @Description //生成验证码图片
+     * @Author liwen
+     * @Date 2020/5/26 18:36
+     * @Param
      * @return
-     */
+     **/
     public void captcha(HttpServletRequest request, HttpServletResponse response) {
         Map<String, Object> codeMap = VerifyCodeUtils.generateCodeAndPic();
         //获得当前会话

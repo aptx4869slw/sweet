@@ -3,7 +3,7 @@ package com.song.sweet.controller;
 import com.song.sweet.controller.vm.PageVM;
 import com.song.sweet.service.TestService;
 import com.song.sweet.service.dto.TestDTO;
-import com.song.sweet.service.utils.ImageUtils;
+import com.song.sweet.utils.ImageUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.jasypt.encryption.StringEncryptor;

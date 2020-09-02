@@ -1,4 +1,4 @@
-package com.song.sweet.service.utils;
+package com.song.sweet.utils;
 
 import eu.bitwalker.useragentutils.Browser;
 import eu.bitwalker.useragentutils.OperatingSystem;

@@ -1,8 +1,7 @@
 package com.song.sweet.core;
 
-import com.song.sweet.service.utils.CommonUtils;
+import com.song.sweet.utils.CommonUtils;
 import eu.bitwalker.useragentutils.UserAgent;
-import eu.bitwalker.useragentutils.Version;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
