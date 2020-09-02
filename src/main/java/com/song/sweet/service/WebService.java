@@ -3,9 +3,9 @@ package com.song.sweet.service;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
-import com.song.sweet.model.ChinazData;
-import com.song.sweet.model.ChinazResult;
-import com.song.sweet.model.GaodeMapData;
+import com.song.sweet.model.vo.ChinazData;
+import com.song.sweet.model.vo.ChinazResult;
+import com.song.sweet.model.vo.GaodeMapData;
 import com.song.sweet.model.LandTrack;
 import com.song.sweet.repository.LandTrackRepository;
 import com.song.sweet.utils.CommonUtils;

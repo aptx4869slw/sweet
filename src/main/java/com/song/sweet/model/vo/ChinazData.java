@@ -1,4 +1,4 @@
-package com.song.sweet.model;
+package com.song.sweet.model.vo;
 
 import java.io.Serializable;
 

@@ -33,6 +33,8 @@ public class UserService {
 
     private final String BLOG_MAIN_PAGE = "blog";
 
+    private final String JUMP_PAGE = "world";
+
     /*
      * @Title 登陆
      * @Description //登陆
@@ -48,7 +50,7 @@ public class UserService {
             Boolean check = PasswordHash.validatePassword(user.getPassword(), password);
             if (check) {
                 logger.info(result.getUsername() + UserStatus.LOGIN_SUCCESS.description() + LocalDateTime.now().format(GeneratorUtils.COMMON_DATE_DTF));
-                return BLOG_MAIN_PAGE;
+                return JUMP_PAGE;
             }
         }
         return UserStatus.LOGIN_FAILED.description();
