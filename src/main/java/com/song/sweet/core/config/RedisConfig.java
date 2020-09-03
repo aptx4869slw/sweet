@@ -16,6 +16,7 @@ import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
+import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 import java.time.Duration;
 
@@ -43,21 +44,23 @@ public class RedisConfig extends CachingConfigurerSupport {
     }
 
     @Bean
-    public RedisTemplate<String, String> redisTemplate(RedisConnectionFactory factory) {
-        StringRedisTemplate template = new StringRedisTemplate(factory);
-        setSerializer(template);//设置序列化工具
-        template.afterPropertiesSet();
-        return template;
-    }
-
-    private void setSerializer(StringRedisTemplate template) {
-        @SuppressWarnings({"rawtypes", "unchecked"})
+    public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory factory) {
+        RedisTemplate<String, Object> redisTemplate = new RedisTemplate<>();
         Jackson2JsonRedisSerializer jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer(Object.class);
-        ObjectMapper om = new ObjectMapper();
-        om.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
-        om.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);
-        jackson2JsonRedisSerializer.setObjectMapper(om);
-        template.setValueSerializer(jackson2JsonRedisSerializer);
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);
+        objectMapper.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
+        jackson2JsonRedisSerializer.setObjectMapper(objectMapper);
+        redisTemplate.setConnectionFactory(factory);
+        // 设置序列化方式
+        StringRedisSerializer stringRedisSerializer = new StringRedisSerializer();
+        redisTemplate.setKeySerializer(stringRedisSerializer);// 设置key采用String的序列化方式
+        redisTemplate.setHashKeySerializer(stringRedisSerializer);// 设置hash的key也采用String的序列化方式
+        redisTemplate.setDefaultSerializer(jackson2JsonRedisSerializer);// 设置其他默认的序列化方式为fastjson
+        redisTemplate.setValueSerializer(jackson2JsonRedisSerializer); // 设置value采用的fastjson的序列化方式
+        redisTemplate.setHashValueSerializer(jackson2JsonRedisSerializer);// 设置hash的value采用的fastjson的序列化方式
+        redisTemplate.afterPropertiesSet();
+        return redisTemplate;
     }
 
 }
