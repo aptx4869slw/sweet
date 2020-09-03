@@ -62,9 +62,11 @@ public class UserService {
                 result.setPassword("******");
                 result.setLandTracks(new HashSet<>());
                 return result;
+            } else {
+                return null;
             }
         }
-        return user;
+        return null;
     }
 
     /**

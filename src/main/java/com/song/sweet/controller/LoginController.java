@@ -33,6 +33,9 @@ public class LoginController {
         logger.debug("REST request to Login Into System : {} ", user.toString());
         try {
             User result = userService.login(request, response, user);
+            if (result == null){
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+            }
             return ResponseEntity.status(HttpStatus.OK).body(result);
         } catch (Exception e) {
             logger.error("REST request to Login Into System : {} " + e.getMessage());
