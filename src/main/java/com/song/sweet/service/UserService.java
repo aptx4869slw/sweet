@@ -21,6 +21,7 @@ import javax.servlet.http.HttpSession;
 import java.awt.image.RenderedImage;
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Map;
 
 @Service
@@ -44,7 +45,7 @@ public class UserService {
      * @Date 2019/5/16 15:48
      * @Param
      */
-    public String login(HttpServletRequest request, HttpServletResponse response, User user) throws Exception {
+    public User login(HttpServletRequest request, HttpServletResponse response, User user) throws Exception {
         User result = userMapper.findByUserName(user);
         if (result != null) {
             String password = result.getPassword();
@@ -58,10 +59,12 @@ public class UserService {
                 // token信息保存在session域，随后保存在响应头
                 /*HttpSession session = request.getSession();
                 session.setAttribute("token", token);*/
-                return JUMP_PAGE;
+                result.setPassword("******");
+                result.setLandTracks(new HashSet<>());
+                return result;
             }
         }
-        return UserStatus.LOGIN_FAILED.description();
+        return user;
     }
 
     /**

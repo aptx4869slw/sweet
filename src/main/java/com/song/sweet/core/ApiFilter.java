@@ -64,17 +64,24 @@ public class ApiFilter implements Filter {
             }
             response.setStatus(HttpStatus.ACCEPTED.value());
             request.setAttribute(JWTUtils.TOKEN_HEADER, token);
-            filterChain.doFilter(request, response);
-        } else if (StringUtils.isNotBlank(method) && method.equalsIgnoreCase("options")) {
             response.setContentType("application/json;charset=UTF-8");
+            // 允许跨域
+            response.setHeader("Access-Control-Allow-Origin", "*");
+            // 允许自定义请求头token(允许head跨域)
+            response.setHeader("Access-Control-Allow-Headers", "token, Accept, Origin, X-Requested-With, Content-Type, Last-Modified");
+            // 允许前端拿到的header
+            response.setHeader("Access-Control-Expose-Headers", "token, Accept, Origin, X-Requested-With, Content-Type, Last-Modified");
+            filterChain.doFilter(request, response);
+        } else if (StringUtils.isNotBlank(method) && method.equalsIgnoreCase("OPTIONS")) {
             response.setHeader("X-Frame-Options", "SAMEORIGIN");
             response.setHeader("Access-Control-Max-Age", "3600");
             response.setHeader("Access-Control-Allow-Origin", "*");
             response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE, PUT");
-            response.setHeader("Access-Control-Allow-Headers", "token, Accept, Origin, authorization, X-Requested-With, Content-Type, Last-Modified");
-            response.setHeader("Access-Control-Expose-Headers", "token, Accept, Origin, authorization, X-Requested-With, Content-Type, Last-Modified");
-            response.setStatus(HttpStatus.UNAUTHORIZED.value());
+            response.setHeader("Access-Control-Allow-Headers", "x-requested-with,accept,authorization,content-type");
         } else {
+            // 允许跨域
+            response.setHeader("Access-Control-Allow-Origin", "*");
+            response.setStatus(HttpStatus.UNAUTHORIZED.value());
             filterChain.doFilter(request, response);
         }
     }
