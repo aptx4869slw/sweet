@@ -79,9 +79,6 @@ public class ApiFilter implements Filter {
             response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE, PUT");
             response.setHeader("Access-Control-Allow-Headers", "x-requested-with,accept,authorization,content-type");
         } else {
-            // 允许跨域
-            response.setHeader("Access-Control-Allow-Origin", "*");
-            response.setStatus(HttpStatus.UNAUTHORIZED.value());
             filterChain.doFilter(request, response);
         }
     }
