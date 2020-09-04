@@ -1,5 +1,7 @@
 package com.song.sweet.model;
 
+import io.swagger.annotations.ApiModelProperty;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -13,39 +15,51 @@ public class LandTrack implements Serializable {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @ApiModelProperty(value = "主键ID", dataType = "Integer", example = "1")
     private Long id;
 
     @Column(name = "login_date")
+    @ApiModelProperty(value = "登陆日期", dataType = "datetime", example = "1970-01-01 00:00:00")
     private LocalDateTime loginDate = LocalDateTime.now();
 
     @Column(name = "ip")
+    @ApiModelProperty(value = "ip地址", dataType = "String", example = "127.0.0.1")
     private String ip;
 
     @Column(name = "country")
+    @ApiModelProperty(value = "国家", dataType = "String", example = "中国")
     private String country;
 
     @Column(name = "province")
+    @ApiModelProperty(value = "省份", dataType = "String", example = "上海市")
     private String province;
 
     @Column(name = "city")
+    @ApiModelProperty(value = "城市", dataType = "String", example = "上海市")
     private String city;
 
     @Column(name = "isp")
+    @ApiModelProperty(value = "isp", dataType = "String", example = "中国上海市上海市")
     private String isp;
 
     @Column(name = "system")
+    @ApiModelProperty(value = "操作系统", dataType = "String", example = "Windows")
     private String system;
 
     @Column(name = "browser")
+    @ApiModelProperty(value = "浏览器", dataType = "String", example = "Chrome")
     private String browser;
 
     @Column(name = "visits")
+    @ApiModelProperty(value = "访问次数", dataType = "Integer", example = "1")
     private Integer visits = 1;
 
     @Column(name = "last_visit_date")
+    @ApiModelProperty(value = "上次访问日期", dataType = "datetime", example = "1970-01-01 00:00:00")
     private LocalDateTime lastVisitDate = LocalDateTime.now();
 
     @Column(name = "rectangle")
+    @ApiModelProperty(value = "经纬度", dataType = "Integer", example = "rectangle")
     private String rectangle;
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)

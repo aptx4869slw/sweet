@@ -25,32 +25,32 @@ public class BaseModel implements Serializable {
 
     @Id
     @Column(name = "id")
-    @ApiModelProperty(value = "主键ID")
+    @ApiModelProperty(value = "主键ID", dataType = "Integer", example = "1")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @CreatedBy
     @Column(name = "create_by")
-    @ApiModelProperty(value = "创建人")
+    @ApiModelProperty(value = "创建人", dataType = "String", example = "SYSTEM")
     private String createBy = "SYSTEM";
 
     @CreatedDate
     @Column(name = "create_date")
-    @ApiModelProperty(value = "创建日期")
+    @ApiModelProperty(value = "创建日期", dataType = "datetime", example = "1970-01-01 00:00:00")
     private LocalDateTime createDate = LocalDateTime.now();
 
     @LastModifiedBy
     @Column(name = "update_by")
-    @ApiModelProperty(value = "修改人")
+    @ApiModelProperty(value = "修改人", dataType = "String", example = "updateBy")
     private String updateBy;
 
     @LastModifiedDate
     @Column(name = "update_date")
-    @ApiModelProperty(value = "修改日期")
+    @ApiModelProperty(value = "修改日期", dataType = "datetime", example = "1970-01-01 00:00:00")
     private LocalDateTime updateDate;
 
     @Column(name = "del_flag")
-    @ApiModelProperty(value = "删除（0.未删除,1:已删除）")
+    @ApiModelProperty(value = "删除标识", dataType = "Integer", example = "0", notes = "0.未删除,1:已删除")
     private Boolean delFlag = Boolean.FALSE;
 
     public Long getId() {
