@@ -18,6 +18,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * @author Liwen
+ * @Description // 项目过滤器
+ * @Version 1.0.0
+ * @create 2019-05-17 16:29
+ */
 @Component
 @WebFilter(urlPatterns = "/*", filterName = "ApiFilter")
 public class ApiFilter implements Filter {
@@ -50,8 +56,18 @@ public class ApiFilter implements Filter {
                 "\",\"User-Browser\":\"" + userAgent.getBrowser() + version +
                 "\"}");
 
+        response.setContentType("application/json;charset=UTF-8");
+        response.setHeader("Access-Control-Max-Age", "3600");
+        response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE, PUT");
+        // 允许跨域
+        response.setHeader("Access-Control-Allow-Origin", "*");
+        // 允许自定义请求头token(允许head跨域)
+        response.setHeader("Access-Control-Allow-Headers", "token, Accept, Origin, X-Requested-With, Content-Type, Last-Modified");
+        // 允许前端拿到的header
+        response.setHeader("Access-Control-Expose-Headers", "token, Accept, Origin, X-Requested-With, Content-Type, Last-Modified");
+
         String token = request.getHeader(JWTUtils.TOKEN_HEADER);
-        boolean invalid = redisUtils.hasKey("tokenBlackList:" + token);
+        Boolean invalid = redisUtils.hasKey("tokenBlackList:" + token);
         if (StringUtils.isNotBlank(token) && token.startsWith(JWTUtils.TOKEN_PREFIX) && JWTUtils.isExpiration(token) && !invalid) {
             token = token.substring(JWTUtils.TOKEN_PREFIX.length());
             if (JWTUtils.canRefresh(token)) {
@@ -64,20 +80,8 @@ public class ApiFilter implements Filter {
             }
             response.setStatus(HttpStatus.ACCEPTED.value());
             request.setAttribute(JWTUtils.TOKEN_HEADER, token);
-            response.setContentType("application/json;charset=UTF-8");
-            // 允许跨域
-            response.setHeader("Access-Control-Allow-Origin", "*");
-            // 允许自定义请求头token(允许head跨域)
-            response.setHeader("Access-Control-Allow-Headers", "token, Accept, Origin, X-Requested-With, Content-Type, Last-Modified");
-            // 允许前端拿到的header
-            response.setHeader("Access-Control-Expose-Headers", "token, Accept, Origin, X-Requested-With, Content-Type, Last-Modified");
+
             filterChain.doFilter(request, response);
-        } else if (StringUtils.isNotBlank(method) && method.equalsIgnoreCase("OPTIONS")) {
-            response.setHeader("X-Frame-Options", "SAMEORIGIN");
-            response.setHeader("Access-Control-Max-Age", "3600");
-            response.setHeader("Access-Control-Allow-Origin", "*");
-            response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE, PUT");
-            response.setHeader("Access-Control-Allow-Headers", "x-requested-with,accept,authorization,content-type");
         } else {
             filterChain.doFilter(request, response);
         }

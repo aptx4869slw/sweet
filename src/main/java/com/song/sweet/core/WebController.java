@@ -6,6 +6,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * @author Liwen
+ * @Description // 前后端快捷访问页面, 前后端不分离的页面控制
+ * @Version 1.0.0
+ * @create 2019-05-14 14:38
+ */
 @Controller
 public class WebController {
 

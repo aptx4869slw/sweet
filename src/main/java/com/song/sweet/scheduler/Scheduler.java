@@ -9,6 +9,12 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 
+/**
+ * @author Liwen
+ * @Description // 定时器
+ * @Version 1.0.0
+ * @create 2019-06-04 16:28
+ */
 @Component
 @EnableScheduling
 public class Scheduler {
