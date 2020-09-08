@@ -4,7 +4,7 @@
     <title>Hi,你好呀</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link type="text/css" rel="styleSheet" href="./css/login.css"/>
-    <link rel="icon" type="image/x-icon" href="./images/favicon.ico"/>
+    <link rel="icon" type="image/x-icon" href="https://sweet-girl-bucket.oss-cn-shanghai.aliyuncs.com/favicon.ico"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
