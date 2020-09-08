@@ -66,25 +66,33 @@ public class ApiFilter implements Filter {
         // 允许前端拿到的header
         response.setHeader("Access-Control-Expose-Headers", "token, Accept, Origin, X-Requested-With, Content-Type, Last-Modified");
 
-        String token = request.getHeader(JWTUtils.TOKEN_HEADER);
-        Boolean invalid = redisUtils.hasKey("tokenBlackList:" + token);
-        if (StringUtils.isNotBlank(token) && token.startsWith(JWTUtils.TOKEN_PREFIX) && JWTUtils.isExpiration(token) && !invalid) {
-            token = token.substring(JWTUtils.TOKEN_PREFIX.length());
-            if (JWTUtils.canRefresh(token)) {
-                redisUtils.setCache("tokenBlackList:" + token, 1, JWTUtils.getExpireTime(token) / 1000);
-                token = JWTUtils.refreshToken(token, false);
+        try {
+            Boolean invalid = Boolean.FALSE;
+            String token = request.getHeader(JWTUtils.TOKEN_HEADER);
+            if (StringUtils.isNotBlank(token) && redisUtils != null) {
+                invalid = redisUtils.hasKey("tokenBlackList:" + token);
             }
-            User user = JWTUtils.getUserInfo(token);
-            if (user != null) {
-                request.setAttribute("currentUser", user);
-            }
-            response.setStatus(HttpStatus.ACCEPTED.value());
-            request.setAttribute(JWTUtils.TOKEN_HEADER, token);
+            if (StringUtils.isNotBlank(token) && token.startsWith(JWTUtils.TOKEN_PREFIX) && JWTUtils.isExpiration(token) && !invalid) {
+                token = token.substring(JWTUtils.TOKEN_PREFIX.length());
+                if (JWTUtils.canRefresh(token) && redisUtils != null) {
+                    redisUtils.setCache("tokenBlackList:" + token, 1, JWTUtils.getExpireTime(token) / 1000);
+                    token = JWTUtils.refreshToken(token, Boolean.FALSE);
+                }
+                User user = JWTUtils.getUserInfo(token);
+                if (user != null) {
+                    request.setAttribute("currentUser", user);
+                }
+                response.setStatus(HttpStatus.ACCEPTED.value());
+                request.setAttribute(JWTUtils.TOKEN_HEADER, token);
 
-            filterChain.doFilter(request, response);
-        } else {
-            filterChain.doFilter(request, response);
+                filterChain.doFilter(request, response);
+            } else {
+                filterChain.doFilter(request, response);
+            }
+        } catch (Exception e) {
+            logger.debug(e.getCause().toString());
         }
+        filterChain.doFilter(request, response);
     }
 
     @Override
