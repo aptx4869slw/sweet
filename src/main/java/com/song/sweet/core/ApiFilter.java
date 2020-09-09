@@ -1,5 +1,6 @@
 package com.song.sweet.core;
 
+import com.alibaba.fastjson.JSON;
 import com.song.sweet.model.User;
 import com.song.sweet.utils.CommonUtils;
 import com.song.sweet.utils.JWTUtils;
@@ -10,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.*;
@@ -57,8 +59,6 @@ public class ApiFilter implements Filter {
                 "\"}");
 
         response.setContentType("application/json;charset=UTF-8");
-        response.setHeader("Access-Control-Max-Age", "3600");
-        response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE, PUT");
         // 允许跨域
         response.setHeader("Access-Control-Allow-Origin", "*");
         // 允许自定义请求头token(允许head跨域)
@@ -67,23 +67,27 @@ public class ApiFilter implements Filter {
         response.setHeader("Access-Control-Expose-Headers", "token, Accept, Origin, X-Requested-With, Content-Type, Last-Modified");
 
         String token = request.getHeader(JWTUtils.TOKEN_HEADER);
-        Boolean invalid = redisUtils.hasKey("tokenBlackList:" + token);
-        if (StringUtils.isNotBlank(token) && token.startsWith(JWTUtils.TOKEN_PREFIX) && JWTUtils.isExpiration(token) && !invalid) {
-            token = token.substring(JWTUtils.TOKEN_PREFIX.length());
-            if (JWTUtils.canRefresh(token)) {
-                redisUtils.setCache("tokenBlackList:" + token, 1, JWTUtils.getExpireTime(token) / 1000);
-                token = JWTUtils.refreshToken(token, false);
-            }
-            User user = JWTUtils.getUserInfo(token);
-            if (user != null) {
-                request.setAttribute("currentUser", user);
-            }
-            response.setStatus(HttpStatus.ACCEPTED.value());
-            request.setAttribute(JWTUtils.TOKEN_HEADER, token);
+        try {
+            Boolean invalid = redisUtils.hasKey("tokenBlackList:" + token);
+            if (StringUtils.isNotBlank(token) && token.startsWith(JWTUtils.TOKEN_PREFIX) && JWTUtils.isExpiration(token) && !invalid) {
+                token = token.substring(JWTUtils.TOKEN_PREFIX.length());
+                if (JWTUtils.canRefresh(token)) {
+                    redisUtils.setCache("tokenBlackList:" + token, 1, JWTUtils.getExpireTime(token) / 1000);
+                    token = JWTUtils.refreshToken(token, false);
+                }
+                User user = JWTUtils.getUserInfo(token);
+                if (user != null) {
+                    request.setAttribute("currentUser", user);
+                }
+                response.setStatus(HttpStatus.ACCEPTED.value());
+                request.setAttribute(JWTUtils.TOKEN_HEADER, token);
 
-            filterChain.doFilter(request, response);
-        } else {
-            filterChain.doFilter(request, response);
+                filterChain.doFilter(request, response);
+            } else {
+                filterChain.doFilter(request, response);
+            }
+        } catch (Exception e){
+            response.getWriter().write(JSON.toJSONString(new ResponseEntity(e.getMessage(), HttpStatus.UNAUTHORIZED)));
         }
     }
 
