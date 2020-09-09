@@ -1,33 +1,24 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url : jdbc:mysql://localhost:3306/sweet?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
-    username : root
-    password : 123$%^
-    # password : ENC(51uMJKgSnH+mihXyFLSM+vRrz+pJptXJ)
-    # 初始化，最小，最大连接数
-    initialSize: 3
-    minidle: 3
-    maxActive: 18
-    # 获取数据库连接等待的超时时间
-    maxWait: 60000
-    # 配置多久进行一次检测，检测需要关闭的空闲连接 单位毫秒
-    timeBetweenEvictionRunsMillis: 60000
-    validationQuery: SELECT 1 FROM dual
+    url : jdbc:mysql://127.0.0.1:3306/sweet?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    username : ENC(7Y1ASPSRVRnIsluHgSMFrw==)
+    password : ENC(zr1CAapZa43EhtHzHY03pQ==)
+#    password : ENC(51uMJKgSnH+mihXyFLSM+vRrz+pJptXJ)
     generate-unique-name: false
     cache-prep-stmts: true
   redis:
-    host: localhost
+    host: 127.0.0.1
     port: 6379
-    password:
+    password: 123456
     database: 0
     jedis:
       pool:
         max-active: 8
-        max-wait: 6000
+        max-wait: -1
         max-idle: 8
         min-idle: 0
-    timeout: 500
+    timeout: 3000
   jpa:
     open-in-view: false
   cache:
