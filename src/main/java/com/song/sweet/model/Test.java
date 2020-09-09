@@ -26,7 +26,7 @@ public class Test extends BaseModel {
     private BigDecimal price;
 
     @Column(name = "flag")
-    @ApiModelProperty(value = "布尔值", dataType = "Integer", example = "0", notes = "0.未删除,1:已删除")
+    @ApiModelProperty(value = "布尔值", dataType = "Boolean", example = "0", notes = "FALSE.未删除,TRUE:已删除")
     private Boolean flag;
 
     @Column(name = "local_date_time")

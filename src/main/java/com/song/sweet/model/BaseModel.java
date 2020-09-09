@@ -50,7 +50,7 @@ public class BaseModel implements Serializable {
     private LocalDateTime updateDate;
 
     @Column(name = "del_flag")
-    @ApiModelProperty(value = "删除标识", dataType = "Integer", example = "0", notes = "0.未删除,1:已删除")
+    @ApiModelProperty(value = "删除标识", dataType = "Boolean", example = "0", notes = "FALSE.未删除,TRUE:已删除")
     private Boolean delFlag = Boolean.FALSE;
 
     public Long getId() {

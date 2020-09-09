@@ -36,12 +36,12 @@ public class Barrage implements Serializable {
     private String href;
 
     @Column(name = "close")
-    @ApiModelProperty(value = "删除标识", dataType = "Integer", example = "0", notes = "0.未删除,1:已删除")
-    private boolean close;
+    @ApiModelProperty(value = "删除标识", dataType = "Boolean", example = "0", notes = "FALSE.未删除,TRUE:已删除")
+    private Boolean close;
 
     @Column(name = "speed")
     @ApiModelProperty(value = "速度", dataType = "Integer", example = "1", notes = "1-10逐级加速")
-    private int speed;
+    private Integer speed;
 
     @Column(name = "color")
     @ApiModelProperty(value = "颜色", dataType = "String", example = "color", notes = "十六进制颜色码")
@@ -91,19 +91,19 @@ public class Barrage implements Serializable {
         this.href = href;
     }
 
-    public boolean isClose() {
+    public Boolean isClose() {
         return close;
     }
 
-    public void setClose(boolean close) {
+    public void setClose(Boolean close) {
         this.close = close;
     }
 
-    public int getSpeed() {
+    public Integer getSpeed() {
         return speed;
     }
 
-    public void setSpeed(int speed) {
+    public void setSpeed(Integer speed) {
         this.speed = speed;
     }
 

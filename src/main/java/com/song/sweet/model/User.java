@@ -26,7 +26,7 @@ public class User extends BaseModel{
     private String conPassword;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-    @ApiModelProperty(value = "登陆轨迹", dataType = "Set", example = "[a,b,c]")
+    @ApiModelProperty(value = "登陆轨迹")
     private Set<LandTrack> landTracks = new HashSet<>();
 
     public String getUsername() {

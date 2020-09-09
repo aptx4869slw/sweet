@@ -17,7 +17,7 @@ import java.util.List;
 
 @Api(tags = "更新日志管理")
 @RestController
-@RequestMapping("/api")
+@RequestMapping(value = "/api", consumes = "application/json", produces = "application/json")
 public class JournalController {
 
     private final Logger logger = LoggerFactory.getLogger(JournalController.class);
@@ -25,7 +25,7 @@ public class JournalController {
     @Autowired
     private JournalService journalService;
 
-    @ApiOperation(value = "保存博客更新日志记录")
+    @ApiOperation(value = "保存博客更新日志记录", notes = "保存博客更新日志记录")
     @PostMapping(path = {"/journal"})
     public ResponseEntity<JournalDTO> saveBarrage(@RequestParam String content) {
         logger.debug("REST request to save a journal : {} ", content);
@@ -38,7 +38,7 @@ public class JournalController {
         }
     }
 
-    @ApiOperation(value = "查询博客更新日志记录")
+    @ApiOperation(value = "查询博客更新日志记录", notes = "查询博客更新日志记录")
     @GetMapping("/journals")
     public ResponseEntity<List<JournalDTO>> getJournals(PageVM page) {
         logger.debug("REST request to get Journals");

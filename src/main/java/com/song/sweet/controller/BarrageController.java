@@ -17,7 +17,7 @@ import java.util.List;
 
 @Api(tags = "弹幕页面管理")
 @RestController
-@RequestMapping("/api")
+@RequestMapping(value = "/api", consumes = "application/json", produces = "application/json")
 public class BarrageController {
 
     private final Logger logger = LoggerFactory.getLogger(BarrageController.class);
@@ -25,7 +25,7 @@ public class BarrageController {
     @Autowired
     private BarrageService barrageService;
 
-    @ApiOperation(value = "保存发送的弹幕")
+    @ApiOperation(value = "保存发送的弹幕", notes = "保存发送的弹幕")
     @PostMapping(path = {"/barrage"}, consumes = "application/json")
     public ResponseEntity saveBarrage(@RequestBody BarrageDTO barrageDTO) {
         logger.debug("REST request to save a barrage : {} ", barrageDTO.toString());
@@ -38,7 +38,7 @@ public class BarrageController {
         }
     }
 
-    @ApiOperation(value = "查询弹幕列表")
+    @ApiOperation(value = "查询弹幕列表", notes = "查询弹幕列表")
     @GetMapping("/barrages")
     public ResponseEntity<List<BarrageDTO>> getBarrages(PageVM page) {
         logger.debug("REST request to get barrages");

@@ -16,7 +16,7 @@ import javax.validation.Valid;
 
 @Api(tags = "用户登录管理")
 @RestController
-@RequestMapping("/api")
+@RequestMapping(value = "/api", consumes = "application/json", produces = "application/json")
 public class LoginController {
 
     private final Logger logger = LoggerFactory.getLogger(LoginController.class);
@@ -27,7 +27,7 @@ public class LoginController {
         this.userService = userService;
     }
 
-    @ApiOperation(value = "用户登录")
+    @ApiOperation(value = "用户登录", notes = "用户登录")
     @PostMapping(value = "/login")
     public ResponseEntity<User> login(HttpServletRequest request, HttpServletResponse response, @Valid User user) {
         logger.debug("REST request to Login Into System : {} ", user.toString());
@@ -43,7 +43,7 @@ public class LoginController {
         }
     }
 
-    @ApiOperation(value = "用户注册")
+    @ApiOperation(value = "用户注册", notes = "用户注册")
     @PostMapping(value = "/register")
     public ResponseEntity<String> register(HttpServletRequest request, HttpServletResponse response, @Valid User user) {
         logger.debug("REST request to register User Into System : {} ", user.toString());

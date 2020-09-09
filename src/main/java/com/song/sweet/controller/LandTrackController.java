@@ -25,14 +25,14 @@ import java.util.List;
  */
 @Api(tags = "博客访问轨迹管理")
 @RestController
-@RequestMapping("/api")
+@RequestMapping(value = "/api", consumes = "application/json", produces = "application/json")
 public class LandTrackController {
     private final Logger logger = LoggerFactory.getLogger(LandTrackController.class);
 
     @Autowired
     private LandTrackService landTrackService;
 
-    @ApiOperation(value = "查询博客被访问的记录轨迹")
+    @ApiOperation(value = "查询博客被访问的记录轨迹", notes = "查询博客被访问的记录轨迹")
     @GetMapping(path = {"/landTracks"})
     public ResponseEntity<List<LandTrackDTO>> findLandTracks(PageVM page) {
         logger.debug("REST request to find all land track.");

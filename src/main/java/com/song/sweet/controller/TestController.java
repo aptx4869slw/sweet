@@ -18,9 +18,9 @@ import org.springframework.web.multipart.MultipartFile;
 import java.net.URI;
 import java.util.List;
 
-@Api(tags = "测试API接口管理")
+@Api(tags = "测试API接口管理", consumes = "application/json")
 @RestController
-@RequestMapping("/api")
+@RequestMapping(value = "/api", consumes = "application/json", produces = "application/json")
 public class TestController {
 
     private final Logger logger = LoggerFactory.getLogger(TestController.class);
@@ -34,7 +34,7 @@ public class TestController {
     @Autowired
     private StringEncryptor encryptor;
 
-    @ApiOperation(value = "创建测试数据")
+    @ApiOperation(value = "创建测试数据", notes = "创建测试数据")
     @PostMapping(path = {"/test"})
     public ResponseEntity<TestDTO> save(@RequestBody TestDTO testDTO) {
         logger.debug("REST request to save Test : {} ", testDTO.toString());
@@ -47,7 +47,7 @@ public class TestController {
         }
     }
 
-    @ApiOperation(value = "根据ID查找测试数据")
+    @ApiOperation(value = "根据ID查找测试数据", notes = "根据ID查找测试数据")
     @GetMapping(path = {"/test/{id}"})
     public ResponseEntity<TestDTO> findOne(@PathVariable Long id) {
         logger.debug("REST request to get a test : {} ", id);
@@ -87,7 +87,7 @@ public class TestController {
         }
     }
 
-    @ApiOperation(value = "修改测试数据")
+    @ApiOperation(value = "修改测试数据", notes = "修改测试数据")
     @PutMapping(path = {"/test"})
     public ResponseEntity<TestDTO> update(@RequestBody TestDTO testDTO) {
         logger.debug("REST request to update Test : {} ", testDTO.toString());
@@ -100,7 +100,7 @@ public class TestController {
         }
     }
 
-    @ApiOperation(value = "删除测试数据")
+    @ApiOperation(value = "删除测试数据", notes = "删除测试数据")
     @DeleteMapping(path = {"/test/{id}"})
     public ResponseEntity<Boolean> delete(@PathVariable Long id) {
         logger.debug("REST request to delete Test : {} ", id);
@@ -126,11 +126,6 @@ public class TestController {
         }
     }
 
-    /**
-     * 加密方法
-     *
-     * @param pass 需加密文本
-     */
     @ApiOperation(value = "测试配置文件加密算法", notes = "将数据库账号密码进行加密保存")
     @GetMapping(path = {"/encrypt"})
     public void testEncrypt(String pass) {
