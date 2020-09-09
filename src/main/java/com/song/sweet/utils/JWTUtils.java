@@ -199,15 +199,7 @@ public class JWTUtils {
 
     public static boolean isExpiration(String token) {
         token = token.substring(JWTUtils.TOKEN_PREFIX.length());
-        Claims claims = null;
-        try {
-            claims = getTokenClaims(token);
-        } catch (ExpiredJwtException jwtException) {
-            return false;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return claims.getExpiration().after(new Date());
+        return getTokenClaims(token).getExpiration().after(new Date());
     }
 
     private static Claims getTokenClaims(String token) {
