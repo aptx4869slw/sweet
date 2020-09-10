@@ -130,7 +130,7 @@ public class TestController {
     @GetMapping(path = {"/encrypt"})
     public void testEncrypt(@RequestParam String pass) {
         String encryptPass = encryptor.encrypt(pass);
-        logger.debug("The encrypted password is : {}---{}", pass, encryptPass);
+        logger.info("The encrypted password is : {} --- {}", pass, encryptPass);
     }
 
 }
