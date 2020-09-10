@@ -116,7 +116,7 @@ public class TestService {
         Specification<Test> specification = this.buildSpecification(Boolean.FALSE);
         Pageable pageable;
         if (page != null && page.getPageNum() != null && page.getPageSize() != null) {
-            pageable = PageRequest.of(page.getPageNum(), page.getPageSize(), Sort.Direction.DESC, "local_date_time");
+            pageable = PageRequest.of(page.getPageNum(), page.getPageSize(), Sort.Direction.DESC, "createDate");
         } else {
             pageable = Pageable.unpaged();
         }
