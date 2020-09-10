@@ -16,7 +16,7 @@ import javax.validation.Valid;
 
 @Api(tags = "用户登录管理")
 @RestController
-@RequestMapping(value = "/api", consumes = "application/json", produces = "application/json")
+@RequestMapping(value = "/api", produces = "application/json")
 public class LoginController {
 
     private final Logger logger = LoggerFactory.getLogger(LoginController.class);

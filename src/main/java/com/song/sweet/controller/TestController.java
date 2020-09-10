@@ -18,9 +18,9 @@ import org.springframework.web.multipart.MultipartFile;
 import java.net.URI;
 import java.util.List;
 
-@Api(tags = "测试API接口管理", consumes = "application/json")
+@Api(tags = "测试API接口管理")
 @RestController
-@RequestMapping(value = "/api", consumes = "application/json", produces = "application/json")
+@RequestMapping(value = "/api", produces = "application/json")
 public class TestController {
 
     private final Logger logger = LoggerFactory.getLogger(TestController.class);
@@ -128,7 +128,7 @@ public class TestController {
 
     @ApiOperation(value = "测试配置文件加密算法", notes = "将数据库账号密码进行加密保存")
     @GetMapping(path = {"/encrypt"})
-    public void testEncrypt(String pass) {
+    public void testEncrypt(@RequestParam String pass) {
         String encryptPass = encryptor.encrypt(pass);
         logger.debug("The encrypted password is : {}---{}", pass, encryptPass);
     }

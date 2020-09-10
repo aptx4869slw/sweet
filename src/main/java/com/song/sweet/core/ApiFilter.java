@@ -9,10 +9,11 @@ import eu.bitwalker.useragentutils.UserAgent;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
@@ -31,9 +32,6 @@ import java.io.IOException;
 public class ApiFilter implements Filter {
 
     private static final Logger logger = LoggerFactory.getLogger(ApiFilter.class);
-
-    @Autowired
-    private RedisUtils redisUtils;
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -68,6 +66,9 @@ public class ApiFilter implements Filter {
 
         String token = request.getHeader(JWTUtils.TOKEN_HEADER);
         try {
+            ServletContext sc = request.getSession().getServletContext();
+            WebApplicationContext cxt = WebApplicationContextUtils.getWebApplicationContext(sc);
+            RedisUtils redisUtils = cxt.getBean(RedisUtils.class);
             Boolean invalid = redisUtils.hasKey("tokenBlackList:" + token);
             if (StringUtils.isNotBlank(token) && token.startsWith(JWTUtils.TOKEN_PREFIX) && JWTUtils.isExpiration(token) && !invalid) {
                 token = token.substring(JWTUtils.TOKEN_PREFIX.length());
@@ -87,6 +88,7 @@ public class ApiFilter implements Filter {
                 filterChain.doFilter(request, response);
             }
         } catch (Exception e){
+            logger.debug(e.toString());
             response.getWriter().write(JSON.toJSONString(new ResponseEntity(e.getMessage(), HttpStatus.UNAUTHORIZED)));
         }
     }

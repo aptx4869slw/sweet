@@ -25,7 +25,7 @@ import java.util.List;
  */
 @Api(tags = "博客访问轨迹管理")
 @RestController
-@RequestMapping(value = "/api", consumes = "application/json", produces = "application/json")
+@RequestMapping(value = "/api", produces = "application/json")
 public class LandTrackController {
     private final Logger logger = LoggerFactory.getLogger(LandTrackController.class);
 

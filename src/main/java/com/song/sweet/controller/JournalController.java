@@ -17,7 +17,7 @@ import java.util.List;
 
 @Api(tags = "更新日志管理")
 @RestController
-@RequestMapping(value = "/api", consumes = "application/json", produces = "application/json")
+@RequestMapping(value = "/api", produces = "application/json")
 public class JournalController {
 
     private final Logger logger = LoggerFactory.getLogger(JournalController.class);
